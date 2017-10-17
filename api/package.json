@@ -1,5 +1,5 @@
 {
-  "name": "alurapic",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,8 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.12.3",
-    "express": "^4.12.3",
-    "nedb": "^1.1.2"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
   }
 }
