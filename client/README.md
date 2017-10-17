@@ -1,4 +1,4 @@
-# tcc
+# Tcc - Client
 
 > PWA utilizando vue.js que tem como objetivo entregar uma aplicação para gestão de doações e meio de contribuição para instituições sociais.
 
