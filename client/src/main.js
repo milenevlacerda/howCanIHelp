@@ -7,6 +7,7 @@ import Notifications from 'vue-notification'
 import Vulma from 'vulma'
 import Bulma from 'Bulma'
 import vueBulmaComponents from 'vue-bulma-components'
+import Vuetify from 'vuetify'
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,7 @@ Vue.use(Vulma)
 Vue.use(Bulma)
 Vue.use(Notifications)
 Vue.use(vueBulmaComponents)
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({
