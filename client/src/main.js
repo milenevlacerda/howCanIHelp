@@ -8,6 +8,8 @@ import Vulma from 'vulma'
 import Bulma from 'Bulma'
 import vueBulmaComponents from 'vue-bulma-components'
 import Vuetify from 'vuetify'
+import '../node_modules/vuetify/dist/vuetify.min.css'
+import './assets/css/form.css'
 
 Vue.config.productionTip = false
 
