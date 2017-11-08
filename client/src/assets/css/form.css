@@ -1,0 +1,25 @@
+.input-group label, 
+.input-group--text-field input {
+  font-size: 18px;
+  color: #36d1b2;
+}
+
+.input-group__details:before {
+  background: #c5c2c2;
+}
+
+.input-group__details {
+  text-align: left;
+}
+
+.input-group.input-group--error .input-group__messages {
+  font-size: 14px;
+}
+
+.input-group.input-group--focused.primary--text {
+  color: #9a475e !important;
+}
+
+.input-group {
+  margin: 30px 0;
+}
