@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import SignUp from '@/components/signUp/SignUp'
 import SignIn from '@/components/signIn/SignIn'
 import Timeline from '@/components/timeline/Timeline'
+import GeneralData from '@/components/generalData/GeneralData'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/timeline',
       name: 'Timeline',
       component: Timeline
+    },
+    {
+      path: '/general',
+      name: 'GeneralData',
+      component: GeneralData
     }
   ]
 })
