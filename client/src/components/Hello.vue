@@ -32,66 +32,71 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
 header
-  display: none
+  display none
 
 h1, h2
-  font-family: 'Pacifico', cursive
-  font-size: 50px
-  color: #fff
-  font-weight: normal
+  font-family 'Pacifico', cursive
+  font-size 50px
+  color #fff
+  font-weight normal
 
 ul
   list-style-type: none
-  padding: 0
+  padding 0
 
 li
-  display: inline-block
-  margin: 0 10px
+  display inline-block
+  margin 0 10px
 
 a
-  color: #35495E
+  color #35495E
 
 .login
-  padding-left: 2.75em
-  padding-right: 2.75em
-  transition: background-color .3s ease
+  padding-left 2.75em
+  padding-right 2.75em
+  transition background-color .3s ease
 
 .wrapper
-  position: relative
-  max-width: 600px
-  margin: 0 auto;
-  padding-top: 50px
+  position relative
+  max-width 600px
+  margin 0 auto
+  padding 50px 10px 0
 
 .logo
-  width: 150px
-  height: 150px
+  width 150px
+  height 150px
 
 .hello
-  position: relative
-  min-height: 650px
-  background: url('../../static/img/bg-hello-page.jpg')
-  background-position: center;
-  background-size: cover
+  position relative
+  min-height 100vh
+  background url('../../static/img/bg-hello-page.jpg')
+  background-position center
+  background-size cover
 
-.hello::before
-  content: ''
-  position: absolute
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  opacity: 0.6;
-  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%)
+  &::before
+    content ''
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
+    opacity 0.6
+    background-image linear-gradient(to right, #fa709a 0%, #fee140 100%)
 
 .about
-  padding: 40px 0 50px
-  color: rgba(#ffffff, 0.7)
+  padding 40px 0 50px
+  font-weight 500
+  color rgba(#ffffff, 0.7)
 
 .advice
-  color: rgba(#ffffff, 0.5)
-  padding: 20px 20px
+  color rgba(#ffffff, 0.5)
+  padding 20px 20px
+  font-weight 500
+  margin 0
 
 .link
-  text-decoration: underline
-  color: #fff;
+  text-decoration underline
+  color #fff
+  font-weight 700
+  letter-spacing .5px
 </style>
