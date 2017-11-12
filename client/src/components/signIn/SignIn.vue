@@ -5,7 +5,7 @@
         <h2 class="title"> Login </h2>
 
       <div class="weather-image-wrapper">
-        <img src="../../assets/images/unlocked.svg" alt="Login" class="account-image">
+        <img src="../../assets/images/user.svg" alt="Login" class="account-image">
       </div>
       <v-form class="wrapp-form" v-model="valid" ref="form" lazy-validation>
         <v-text-field
@@ -15,6 +15,7 @@
           required
         ></v-text-field>
         <v-text-field
+          type="password"
           label="Senha"
           v-model="pass"
           :rules="passRules"
@@ -37,7 +38,7 @@
 </template>
 <script>
 export default {
-  name: 'signUp',
+  name: 'SignIn',
 
   data: () => ({
     valid: true,
@@ -87,7 +88,7 @@ export default {
   text-align left 
 
 .centered 
-  margin 80px auto
+  margin 80px auto 0px
   padding-bottom 20px
   text-align center
 
@@ -96,7 +97,6 @@ export default {
   opacity 0.9
   background #fff
   padding-top 30px
-  font-family 'Dosis', sans-serif
 
 .submitBtn
   color #fff
@@ -111,7 +111,6 @@ export default {
   max-width 300px
   border-radius 2px
   font-size 1.25rem
-  font-family 'Dosis', sans-serif
 
 .clear 
   padding-left 2.75em
@@ -138,13 +137,13 @@ export default {
 .title
   font-size 50px !important
   color #36d1b2
+  font-weight 200
   margin: 5px 0 59px
 
 .hello
   position relative
+  padding 20px
   min-height 100vh
-  padding 20px;
-  min-height 650px
   background url('../../../static/img/bg-hello-page.jpg')
   background-position center
   background-size cover
