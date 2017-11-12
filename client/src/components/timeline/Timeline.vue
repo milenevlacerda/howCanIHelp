@@ -1,101 +1,69 @@
 <template>
   <div>
-    <vulma-navbar class="navbar" show-menu-button='true' @menu-clicked='$refs.drawer.open()'>
-      <vulma-navitem slot='left' :is-tab='false'>
-        <img class="logo" src="../../../static/img/care.png">
-      </vulma-navitem>
-      <vulma-navitem class="title" slot='center'>
-        <h3 class="page-title">{{ title }}</h3>
-      </vulma-navitem>
-    </vulma-navbar>
-    <vulma-drawer ref='drawer'>
-      <vulma-drawerheader name='Milene ' email='milenelacerda@icloud.com ' avatar='' color='custom-hulk '></vulma-drawerheader>
-      <vulma-menu>
-
-        <vulma-menuitem icon='fa-user'>{{ profileTile }}</vulma-menuitem>
-        <vulma-menugroup :title="configTitle">
-          <vulma-menuitem>{{ accountTitle }}</vulma-menuitem>
-          <vulma-menuitem>{{ paymentTitle }}</vulma-menuitem>
-          <vulma-menuitem>{{ projectsTitle }}</vulma-menuitem>
-        </vulma-menugroup>
-
-      </vulma-menu>
-    </vulma-drawer>
-
+    <menu-component :title="title"></menu-component>
+    
     <div class="wrapper">
       
-      <div class="tabs is-centered is-boxed">
-        <ul>
-          <li class="is-active">
-            <a>
-              <span>{{ filters.all }}</span>
-            </a>
-          </li>
-          <li>
-            <a>
-              <span>{{ filters.animals }}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <ul uk-tab class="uk-flex-center">
+        <li><a href="#">{{ filters.all }}</a></li>
+        <li><a href="#">{{ filters.animals }}</a></li>
+      </ul>
       
-
-      <div class="wrapper-card">
-        <div v-for="project in projects" :key="project.id" class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img :src="'./static/img/' + project.image" alt="Image">
-            </figure>
-          </div>   
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img src="../../../static/img/bg-hello-page.jpg" alt="Image">
-                </figure>
+      <ul class="wrapper-card uk-switcher uk-margin">
+        <li>
+          <div v-for="project in projects" :key="project.id" class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img :src="'./static/img/' + project.image" alt="Image">
+              </figure>
+            </div>   
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="../../../static/img/bg-hello-page.jpg" alt="Image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">{{ project.title }}</p>
+                  <p class="subtitle is-6">@projeto</p>
+                </div>
               </div>
-              <div class="media-content">
-                <p class="title is-4">{{ project.title }}</p>
-                <p class="subtitle is-6">@projeto</p>
-              </div>
-            </div>
-        
-            <div class="content">
-              
-              {{ project.description }}
+          
+              <div class="content">
+                
+                {{ project.description }}
 
-              <a>@projeto</a>.
-              <a>#categoria</a>
-              <a>#categoria</a>
-              <br>
-              <small>09:09 AM - 25 Agosto 2017</small>
+                <a>@projeto</a>.
+                <a>#categoria</a>
+                <a>#categoria</a>
+                <br>
+                <small>09:09 AM - 25 Agosto 2017</small>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
 import { bulmaComponentGenerator } from 'vue-bulma-components'
 import { listProjects } from '../../services/projects/ProjectService'
+import menuComponent from '../menu/Menu'
 
 export default {
-  name: 'timeline',
+  name: 'Timeline',
 
   components: {
-    box: bulmaComponentGenerator('box')
+    box: bulmaComponentGenerator('box'),
+    'menu-component': menuComponent
   },
 
   data () {
     return {
       projects: [],
       title: 'Projetos',
-      profileTile: 'Perfil',
-      configTitle: 'Configurações',
-      accountTitle: 'Conta',
-      paymentTitle: 'Pagamento',
-      projectsTitle: 'Projetos',
       filters: {
         all: 'all',
         animals: 'animals'
@@ -125,14 +93,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.bgcolor-custom-hulk 
-  color: white
-  background-color: #00d1b2
-  
-.navbar
-  background-color: #00d1b2 !important
-  min-height: 4.25rem !important
-
 .wrapper
   margin: 0 auto
   padding: 90px 20px 20px
@@ -141,15 +101,6 @@ export default {
   max-width: 450px
   padding-top: 20px
   margin: 0 auto 10px
-  
-.menu-button[data-v-9d073fb2]
-  transition: .4s ease
-
-.page-title 
-  font-size: 30px
-  color: #fff
-  cursor: default
-  font-family: 'Pacifico', cursive
 
 .card 
   margin-bottom: 40px;  
