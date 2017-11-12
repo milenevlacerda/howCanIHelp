@@ -50,7 +50,7 @@
 </template>
 <script>
 export default {
-  name: 'signUp',
+  name: 'SignUp',
 
   data: () => ({
     valid: true,
@@ -100,7 +100,7 @@ export default {
   text-align left 
 
 .centered 
-  margin 80px auto
+  margin 80px auto 0px
   padding-bottom 20px
   text-align center
 
@@ -151,13 +151,13 @@ export default {
 .title
   font-size 50px !important
   color #36d1b2
+  font-weight 200
   margin: 5px 0 59px
 
 .hello
   position relative
   min-height 100vh
-  padding 20px;
-  min-height 650px
+  padding 20px
   background url('../../../static/img/bg-hello-page.jpg')
   background-position center
   background-size cover
