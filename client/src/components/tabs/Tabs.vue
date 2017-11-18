@@ -124,9 +124,8 @@ export default {
   width 80%
 
 .alignment
-  text-align left
+  text-align center
   width 80%
-  margin-left 62px
 
 .uk-radio 
   margin-right 8px
