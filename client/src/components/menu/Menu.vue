@@ -18,7 +18,7 @@
         </vulma-menuitem>
 
         <vulma-menuitem icon='fa-user'>
-          <router-link :to="{ name: '' }">
+          <router-link :to="{ name: 'Profile' }">
             {{ profileTitle }}
           </router-link>
         </vulma-menuitem>
