@@ -1,0 +1,81 @@
+.input-group label, 
+.input-group--text-field input {
+  font-size: 18px;
+  color: #36d1b2;
+}
+
+.input-group__details:before {
+  background: #c5c2c2;
+}
+
+.input-group__details {
+  text-align: left;
+}
+
+.input-group.input-group--error .input-group__messages {
+  font-size: 14px;
+}
+
+.input-group.input-group--focused.primary--text {
+  color: #9a475e !important;
+}
+
+.input-group {
+  margin: 30px 0;
+}
+
+.slick-list {
+  max-width: 660px;
+}
+
+.slick-dots li {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  outline: none;
+  margin: 5px;
+  border-radius: 50%;
+  background: #fff;
+  color: #fff;
+}
+
+.slider {
+  height: auto;
+}
+
+.slick-dots .slick-active {
+  background: rgba(255, 255, 255, 0.53);
+}
+
+.slick-dots button {
+  font-size: 0;
+}
+
+.slick-slide {
+  padding: 7px 2px;
+  width: 320px;
+}
+
+.slick-slide a {
+  position: relative;
+}
+
+.slick-slide a::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(105, 105, 105, 0.493);
+}
+
+.slick-slide img {
+  border-radius: 6px;
+}
+
+.slick-track {
+  padding-top: 30px;
+}
+  
