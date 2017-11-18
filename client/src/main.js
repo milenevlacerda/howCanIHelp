@@ -10,10 +10,12 @@ import Vuetify from 'vuetify'
 
 import 'uikit/dist/css/uikit.min.css'
 import 'uikit/dist/js/uikit.min.js'
-import 'uikit/dist/js/uikit-icons'
+import 'uikit/dist/js/uikit-icons.min.js'
 
 import '../node_modules/vuetify/dist/vuetify.min.css'
-import './assets/css/form.css'
+import '../node_modules/slick-carousel/slick/slick.css'
+import '../node_modules/slick-carousel/slick/slick.js'
+import './assets/css/new-styles.css'
 
 Vue.config.productionTip = false
 
