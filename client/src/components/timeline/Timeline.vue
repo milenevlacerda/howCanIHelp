@@ -41,6 +41,9 @@
                 <small>09:09 AM - 25 Agosto 2017</small>
               </div>
             </div>
+            <router-link :to="{ name: 'Project' }">
+              <button class="uk-button uk-button-secondary uk-button-large">Ver Mais</button>
+            </router-link>
           </div>
         </li>
       </ul>
@@ -94,15 +97,21 @@ export default {
 
 <style lang="stylus" scoped>
 .wrapper
-  margin: 0 auto
-  padding: 90px 20px 20px
+  margin 0 auto
+  padding 90px 20px 20px
 
 .wrapper-card
-  max-width: 450px
-  padding-top: 20px
-  margin: 0 auto 10px
+  max-width 450px
+  padding-top 20px
+  margin 0 auto 10px
 
 .card 
-  margin-bottom: 40px;  
+  margin-bottom 40px
+
+.uk-button-large
+  width 100%
+  background-color #36d1b2
+  font-weight 600
+  letter-spacing 1px
 </style>
 
