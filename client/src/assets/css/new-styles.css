@@ -78,4 +78,18 @@
 .slick-track {
   padding-top: 30px;
 }
+
+.wizard-header {
+  display: none;
+} 
+
+.vue-form-wizard {
+  padding-top: 50px;
+}
+
+.wizard-tab-container {
+  max-width: 300px;
+  text-align: left;
+  margin: 0 auto;
+}
   
