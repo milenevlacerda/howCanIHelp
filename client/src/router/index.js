@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import SignUp from '@/components/signUp/SignUp'
+import SignUpOng from '@/components/signUpOng/SignUpOng'
 import SignIn from '@/components/signIn/SignIn'
 import Timeline from '@/components/timeline/Timeline'
-import GeneralData from '@/components/generalData/GeneralData'
 import Project from '@/components/project/Project'
 import Profile from '@/components/profile/Profile'
+import GeneralData from '@/components/generalData/GeneralData'
+import CreateProject from '@/components/createProject/CreateProject'
 
 Vue.use(Router)
 
@@ -18,9 +20,19 @@ export default new Router({
       component: Hello
     },
     {
+      path: '/createProject',
+      name: 'CreateProject',
+      component: CreateProject
+    },
+    {
       path: '/signUp',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/signUpOng',
+      name: 'SignUpOng',
+      component: SignUpOng
     },
     {
       path: '/signIn',
