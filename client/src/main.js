@@ -7,10 +7,15 @@ import Notifications from 'vue-notification'
 import Vulma from 'vulma'
 import vueBulmaComponents from 'vue-bulma-components'
 import Vuetify from 'vuetify'
+import ElementUI from 'element-ui'
+import VueFormWizard from 'vue-form-wizard'
 
 import 'uikit/dist/css/uikit.min.css'
 import 'uikit/dist/js/uikit.min.js'
 import 'uikit/dist/js/uikit-icons.min.js'
+
+import 'element-ui/lib/theme-chalk/index.css'
+import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
 import '../node_modules/vuetify/dist/vuetify.min.css'
 import '../node_modules/slick-carousel/slick/slick.css'
@@ -23,6 +28,8 @@ Vue.use(Vulma)
 Vue.use(Notifications)
 Vue.use(vueBulmaComponents)
 Vue.use(Vuetify)
+Vue.use(ElementUI)
+Vue.use(VueFormWizard)
 
 /* eslint-disable no-new */
 new Vue({
