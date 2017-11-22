@@ -12,6 +12,8 @@
 
       <p class="advice">Ainda não possui uma conta?
         <router-link :to="{ name: 'SignUp' }"><a href="" class="link">Cadastre-se</a></router-link>
+        ou 
+        <router-link :to="{ name: 'SignUpOng' }"><a href="" class="link">Cadastre sua ONG</a></router-link>
       </p>
 
     </div>
