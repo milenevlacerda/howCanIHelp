@@ -4,55 +4,63 @@
     
     <div class="wrapper">
       
-      <ul class="wrapper-card uk-flex uk-flex-center uk-flex-wrap 	uk-text-center" uk-grid>
+      <ul class="wrapper-card uk-flex uk-flex-center uk-flex-wrap uk-text-center">
+        
+        <router-link :to="{ name: 'ProjectData' }">
+          <li class="card-item">
+            <div class="project-card uk-card uk-card-default uk-card-body">
+              <div class="details-wrapper">
+                <h3 class="project-title">Project 1</h3>
+                <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+              </div>
+              <div class="project-foto">
+                <img :src="'./static/img/project0.jpg'" alt="">
+              </div>
+            </div>
+          </li> 
+        </router-link>
+        
+        <router-link :to="{ name: 'ProjectData' }">
+          <li class="card-item">
+            <div class="project-card uk-card uk-card-default uk-card-body">
+              <div class="details-wrapper">
+                <h3 class="project-title">Project 1</h3>
+                <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+              </div>
+              <div class="project-foto">
+                <img :src="'./static/img/project0.jpg'" alt="">
+              </div>
+            </div>
+          </li> 
+        </router-link>
 
-        <li class="card-item">
-          <div class="project-card uk-card uk-card-default uk-card-body">
-            <div class="details-wrapper">
-              <h3 class="project-title">Project 1</h3>
-              <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+        <router-link :to="{ name: 'ProjectData' }">
+          <li class="card-item">
+            <div class="project-card uk-card uk-card-default uk-card-body">
+              <div class="details-wrapper">
+                <h3 class="project-title">Project 1</h3>
+                <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+              </div>
+              <div class="project-foto">
+                <img :src="'./static/img/project0.jpg'" alt="">
+              </div>
             </div>
-            <div class="project-foto">
-              <img :src="'./static/img/project0.jpg'" alt="">
-            </div>
-          </div>
-        </li> 
+          </li> 
+        </router-link>
 
-        <li class="card-item">
-          <div class="project-card uk-card uk-card-default uk-card-body">
-            <div class="details-wrapper">
-              <h3 class="project-title">Project 1</h3>
-              <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+        <router-link :to="{ name: 'ProjectData' }">
+          <li class="card-item">
+            <div class="project-card uk-card uk-card-default uk-card-body">
+              <div class="details-wrapper">
+                <h3 class="project-title">Project 1</h3>
+                <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
+              </div>
+              <div class="project-foto">
+                <img :src="'./static/img/project0.jpg'" alt="">
+              </div>
             </div>
-            <div class="project-foto">
-              <img :src="'./static/img/project0.jpg'" alt="">
-            </div>
-          </div>
-        </li> 
-
-        <li class="card-item">
-          <div class="project-card uk-card uk-card-default uk-card-body">
-            <div class="details-wrapper">
-              <h3 class="project-title">Project 1</h3>
-              <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
-            </div>
-            <div class="project-foto">
-              <img :src="'./static/img/project0.jpg'" alt="">
-            </div>
-          </div>
-        </li> 
-
-        <li class="card-item">
-          <div class="project-card uk-card uk-card-default uk-card-body">
-            <div class="details-wrapper">
-              <h3 class="project-title">Project 1</h3>
-              <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ducimus.</p>
-            </div>
-            <div class="project-foto">
-              <img :src="'./static/img/project0.jpg'" alt="">
-            </div>
-          </div>
-        </li> 
+          </li>
+        </router-link> 
 
       </ul>
 
