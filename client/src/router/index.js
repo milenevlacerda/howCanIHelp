@@ -8,6 +8,7 @@ import Timeline from '@/components/timeline/Timeline'
 import Project from '@/components/project/Project'
 import Profile from '@/components/profile/Profile'
 import GeneralData from '@/components/generalData/GeneralData'
+import DonationData from '@/components/donationData/DonationData'
 import CreateProject from '@/components/createProject/CreateProject'
 
 Vue.use(Router)
@@ -58,6 +59,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/donationData',
+      name: 'DonationData',
+      component: DonationData
     }
   ]
 })
