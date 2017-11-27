@@ -32,17 +32,69 @@
         </tab-content>
         <tab-content title="Informações da ONG"
                       icon="el-icon-setting">
-          My second tab content
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Número de Registro na prefeitura</label>
+            <input class="uk-input uk-form-width-medium" id="townHallRegister" type="text" placeholder="">
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Inscrição Estadual</label>
+            <input class="uk-input uk-form-width-medium" id="stateSubscription" type="text" placeholder="">
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Números de Funcionários</label>
+            <input class="uk-input uk-form-width-medium" id="employeesNumber" type="text" placeholder="">
+          </div>
+
         </tab-content>
         <tab-content title="Conclusão"
                       icon="el-icon-check">
-          Yuhuuu! This seems pretty damn simple
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Endereço</label>
+            <input class="uk-input uk-form-width-medium" id="address" type="text" placeholder="">
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Telefone</label>
+            <input class="uk-input uk-form-width-medium" id="ongPhone" type="text" placeholder="">
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Área de atuação</label>
+            <select class="uk-select">
+                <option>Assistência Social</option>
+                <option>Cultura</option>
+                <option>Saúde</option>
+                <option>Meio Ambiente</option>
+                <option>Animal</option>
+                <option value="">Desenvolvimento e defesa de direitos</option>
+                <option value="">Habitação</option>
+                <option value="">Educação e Pesquisa</option>
+            </select>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Tipo</label>
+            <select class="uk-select">
+                <option>Fundação</option>
+                <option>Organização da Sociedade Civil</option>
+                <option>Cooperativa</option>
+                <option>Organização da Sociedade Civil de Interesse Público</option>
+                <option>Organização Social</option>
+                <option value="">Instituto Empresarial</option>
+                <option value="">Entidade Beneficente De Assistência Social</option>
+                <option value="">Negócio Social</option>
+            </select>
+          </div>
         </tab-content>
       </form-wizard>
     </div>
   </div>
 </template>
 <script>
+import router from '../../router'
+
 export default {
   name: 'SignUp',
 
@@ -84,7 +136,8 @@ export default {
 
   methods: {
     onComplete: function () {
-      alert('Yay. Done!')
+      alert('Requisição de conta solicitada. Em breve retornaremos!')
+      router.push({ path: '/' })
     },
     validateFirstStep () {
       return new Promise((resolve, reject) => {
