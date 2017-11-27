@@ -23,6 +23,18 @@
           </router-link>
         </vulma-menuitem>
 
+        <vulma-menuitem icon="fa-plus">
+          <router-link :to="{ name: 'CreateProject' }">
+            {{ createProjectTitle }}
+          </router-link>
+        </vulma-menuitem>
+
+        <vulma-menuitem icon="fa-bar-chart">
+          <router-link :to="{ name: 'DonationData' }">
+            {{ projectsDataTitle }}
+          </router-link>
+        </vulma-menuitem>
+
         <vulma-menuitem icon="fa-cog">
           <router-link :to="{ name: 'GeneralData' }">
             {{ configTitle }}
@@ -52,7 +64,9 @@ export default {
       timelineTitle: 'Home',
       profileTitle: 'Perfil',
       configTitle: 'Configurações',
-      projectsTitle: 'Projetos'
+      projectsTitle: 'Projetos',
+      createProjectTitle: 'Criar novo projeto',
+      projectsDataTitle: 'Dados de Doações'
     }
   }
 }
