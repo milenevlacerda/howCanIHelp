@@ -3,56 +3,29 @@
     <menu-component :title="title"></menu-component>
     
     <div class="wrapper">
-      <vuestic-chart v-bind:data="chartData" :options="chartOptions" type="vertical-bar"></vuestic-chart>
-
+      <line-chart></line-chart>
     </div>
 
   </div>
 </template>
 <script>
 import menuComponent from '../menu/Menu'
+import lineChart from '../line-chart/LineChart'
 
 export default {
   name: 'ProjectData',
 
   components: {
-    'menu-component': menuComponent
+    'menu-component': menuComponent,
+    'line-chart': lineChart
   },
 
   data () {
     return {
       title: 'Dados do Projeto'
     }
-  },
-
-  legend: {
-    position: 'bottom',
-    labels: {
-      fontColor: '#333',
-      fontFamily: 'sans-serif',
-      fontSize: 14,
-      padding: 20,
-      usePointStyle: true
-    }
-  },
-  tooltips: {
-    bodyFontSize: 14,
-    bodyFontFamily: 'sans-serif'
-  },
-  responsive: true,
-  maintainAspectRatio: false
+  }
 }
-
-// let chartData = {
-//   labels: ['January', 'February'],
-//   datasets: [
-//     {
-//       label: 'GitHub Commits',
-//       backgroundColor: '#f87979',
-//       data: [40, 20]
-//     }
-//   ]
-// }
 </script>
 
 <style lang="stylus" scoped>
