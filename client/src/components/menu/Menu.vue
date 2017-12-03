@@ -42,8 +42,8 @@
         </vulma-menuitem>
 
         <vulma-menuitem icon="fa-folder">
-          <router-link :to="{ name: '' }">
-            {{ projectsTitle }}
+          <router-link :to="{ name: 'Investments' }">
+            {{ investments }}
           </router-link>
         </vulma-menuitem>
       
@@ -64,7 +64,7 @@ export default {
       timelineTitle: 'Home',
       profileTitle: 'Perfil',
       configTitle: 'Configurações',
-      projectsTitle: 'Investimentos',
+      investments: 'Investimentos',
       createProjectTitle: 'Criar novo projeto',
       projectsDataTitle: 'Dados de Doações'
     }
