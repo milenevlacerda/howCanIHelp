@@ -15,15 +15,30 @@
       <h3 class="uk-text-lead">Milene Vieira Lacerda</h3>
       <h6 class="uk-text-meta">Charqueadas, RS</h6>
 
+      <!-- This is an anchor toggling the modal -->
+      <a href="#modal-example" uk-toggle class="about">SOBRE</a>
+
+      <!-- This is the modal -->
+      <div id="modal-example" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+          <h2 class="uk-modal-title">Titulo</h2>
+          <p>Dados preeenchidos no cadastro</p>
+          <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Fechar</button>
+          </p>
+        </div>
+      </div>
+
       <div class="slider">
-        <a href="">
+        <a href="" >
           <h3 class="project-name uk-text-uppercase uk-text-small">Projeto 1</h3>
           <img src="../../../static/img/project0.jpg" alt="">
         </a>
-        <a href="">
+
+        <!-- <div href="">
           <h3 class="project-name uk-text-uppercase uk-text-small">Projeto 1</h3>
           <img src="../../../static/img/project0.jpg" alt="">
-        </a>
+        </d>
         <a href="">
           <h3 class="project-name uk-text-uppercase uk-text-small">Projeto 1</h3>
           <img src="../../../static/img/project1.jpg" alt="">
@@ -55,7 +70,7 @@
         <a href="">
           <h3 class="project-name uk-text-uppercase uk-text-small">Projeto 1</h3>
           <img src="../../../static/img/project3.jpg" alt="">
-        </a>
+        </a> -->
       </div>
     </div>
   </div>
@@ -138,4 +153,15 @@ export default {
   position absolute
   padding 10px
   color #fff
+
+.link-modal
+  position relative
+  bottom 0
+  z-index 1000
+
+.about
+  font-weight 800
+  color #4ed2b2
+  letter-spacing 1px
+  border-bottom 1px solid #4ed2b2
 </style>
