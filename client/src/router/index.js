@@ -10,6 +10,7 @@ import Profile from '@/components/profile/Profile'
 import GeneralData from '@/components/generalData/GeneralData'
 import DonationData from '@/components/donationData/DonationData'
 import CreateProject from '@/components/createProject/CreateProject'
+import Investments from '@/components/investments/Investments'
 import ProjectData from '@/components/projectData/ProjectData'
 
 Vue.use(Router)
@@ -70,6 +71,11 @@ export default new Router({
       path: '/projectData',
       name: 'ProjectData',
       component: ProjectData
+    },
+    {
+      path: '/investments',
+      name: 'Investments',
+      component: Investments
     }
   ]
 })
