@@ -64,7 +64,7 @@ export default {
       timelineTitle: 'Home',
       profileTitle: 'Perfil',
       configTitle: 'Configurações',
-      projectsTitle: 'Projetos',
+      projectsTitle: 'Investimentos',
       createProjectTitle: 'Criar novo projeto',
       projectsDataTitle: 'Dados de Doações'
     }
