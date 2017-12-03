@@ -8,6 +8,7 @@ import Vulma from 'vulma'
 import vueBulmaComponents from 'vue-bulma-components'
 import Vuetify from 'vuetify'
 import ElementUI from 'element-ui'
+import VueChartJS from 'vue-chartjs'
 import VueFormWizard from 'vue-form-wizard'
 
 import 'uikit/dist/css/uikit.min.css'
@@ -30,6 +31,7 @@ Vue.use(vueBulmaComponents)
 Vue.use(Vuetify)
 Vue.use(ElementUI)
 Vue.use(VueFormWizard)
+Vue.use(VueChartJS)
 
 /* eslint-disable no-new */
 new Vue({
