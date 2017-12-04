@@ -4,7 +4,7 @@
     
     <div class="wrapper">
       <div class="wrapper-card">
-        <div class="card"> <!-- remover v-for após organizar backend -->
+        <div class="card"> 
           <div class="card-image">
             <figure class="image is-4by3">
               <img :src="'./static/img/project0.jpg'" alt="Image">
@@ -78,6 +78,7 @@ export default {
     imgSrc: '',
     projectTitle: '',
     category: '',
+    projectDescription: '',
     postData: ''
   },
 
