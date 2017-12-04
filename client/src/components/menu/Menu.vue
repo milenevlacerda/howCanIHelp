@@ -41,12 +41,17 @@
           </router-link>  
         </vulma-menuitem>
 
-        <vulma-menuitem icon="fa-folder">
+        <vulma-menuitem icon="fa-money">
           <router-link :to="{ name: 'Investments' }">
             {{ investments }}
           </router-link>
         </vulma-menuitem>
-      
+
+        <vulma-menuitem icon="fa-clock-o">
+          <router-link :to="{ name: 'DonationHistory' }">
+            {{ donationHistory }}
+          </router-link>
+        </vulma-menuitem>
 
       </vulma-menu>
     </vulma-drawer>
@@ -66,7 +71,8 @@ export default {
       configTitle: 'Configurações',
       investments: 'Investimentos',
       createProjectTitle: 'Criar novo projeto',
-      projectsDataTitle: 'Dados de Doações'
+      projectsDataTitle: 'Dados de Doações',
+      donationHistory: 'Histórico de Doações'
     }
   }
 }
