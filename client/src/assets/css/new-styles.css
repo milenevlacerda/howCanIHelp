@@ -68,6 +68,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  transition: .5s ease-in-out;
   background: rgba(105, 105, 105, 0.493);
 }
 
