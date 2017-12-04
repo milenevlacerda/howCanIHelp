@@ -33,10 +33,12 @@
               <div class="uk-margin">
                   <input class="uk-input" type="text" :placeholder="phone">
               </div>
-              <div class="uk-margin alignment">
-                <p class="uk-text-small">Mostrar no perfil os projetos que apoia?</p>
-                <label class="space"><input class="uk-radio" type="radio" name="radio2" checked>Sim</label>
-                <label class="space"><input class="uk-radio" type="radio" name="radio2">Não</label>
+              <div class="uk-margin">
+                <div class="info-wrapp">
+                  <p class="uk-text-small">Mostrar no perfil os projetos que apoia?</p>
+                  <label class="space"><input class="uk-radio" type="radio" name="radio2" checked>Sim</label>
+                  <label class="space"><input class="uk-radio" type="radio" name="radio2">Não</label>
+                </div>
               </div>
           </fieldset>
 
@@ -60,6 +62,20 @@
               <div class="uk-margin">
                   <input class="uk-input" type="text" placeholder="CVV">
               </div>
+              <div class="uk-margin">
+                  <input class="uk-input" type="text" placeholder="Projeto">
+              </div>
+              <div class="uk-margin">
+                  <input class="uk-input" type="number" placeholder="R$ Valor">
+              </div>
+              <div class="uk-margin">
+                <div class="info-wrapp">
+                  <p class="uk-text-small">Tipo de doação</p>
+                  <label class="space"><input class="uk-radio" type="radio" name="radio2" checked>Manual</label>
+                  <label class="space"><input class="uk-radio" type="radio" name="radio2">Mensal</label>
+                  <label class="space"><input class="uk-radio" type="radio" name="radio2">Anual</label>
+                </div>
+              </div>
           </fieldset>
           <button class="uk-button uk-button-primary uk-width-1-2 uk-margin-small-bottom">Salvar</button>
         </form>
@@ -74,7 +90,8 @@ export default {
 
   props: {
     index: 0,
-    center: true
+    center: true,
+    nomeDoProjeto: ''
   },
 
   data () {
@@ -132,5 +149,10 @@ export default {
 
 .space
   margin-right 20px
+
+.info-wrapp
+  width 80%
+  margin 0 auto
+  text-align left
 </style>
 
