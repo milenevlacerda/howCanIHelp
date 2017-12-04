@@ -1,7 +1,18 @@
 <template>
   <div>
     <menu-component :title="title"></menu-component>
-    
+
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-left">
+        <div class="uk-navbar-item">
+          <form class="uk-search uk-search-navbar">
+            <span uk-search-icon></span>
+            <input class="uk-search-input" type="search" placeholder="Procurar Projetos...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
     <div class="wrapper">
       
       <ul uk-tab class="uk-flex-center">
@@ -76,10 +87,9 @@ export default {
 
   methods: {
     fetchProjects () {
-      listProjects()
-        .then(data => {
-          this.projects = data
-        })
+      listProjects().then(data => {
+        this.projects = data
+      })
     }
   },
 
@@ -98,20 +108,24 @@ export default {
 <style lang="stylus" scoped>
 .wrapper
   margin 0 auto
-  padding 90px 20px 20px
+  padding 5px 20px 20px
+  background-color #f8f8f8
 
-.wrapper-card
+.wrapper-card 
   max-width 450px
   padding-top 20px
   margin 0 auto 10px
 
-.card 
+.card
   margin-bottom 40px
 
-.uk-button-large
+.uk-button-large 
   width 100%
   background-color #36d1b2
   font-weight 600
   letter-spacing 1px
+
+.uk-navbar-container
+  margin-top 60px
 </style>
 
