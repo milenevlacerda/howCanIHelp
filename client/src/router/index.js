@@ -12,6 +12,7 @@ import DonationData from '@/components/donationData/DonationData'
 import CreateProject from '@/components/createProject/CreateProject'
 import Investments from '@/components/investments/Investments'
 import ProjectData from '@/components/projectData/ProjectData'
+import DonationHistory from '@/components/donationHistory/DonationHistory'
 
 Vue.use(Router)
 
@@ -76,6 +77,11 @@ export default new Router({
       path: '/investments',
       name: 'Investments',
       component: Investments
+    },
+    {
+      path: '/donationHistory',
+      name: 'DonationHistory',
+      component: DonationHistory
     }
   ]
 })
