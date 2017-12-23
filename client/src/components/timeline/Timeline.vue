@@ -22,10 +22,10 @@
       
       <ul class="wrapper-card uk-switcher uk-margin">
         <li>
-          <div v-for="project in projects" :key="project.id" class="card">
+          <div v-for="project in projects" :key="project.idProjeto" class="card">
             <div class="card-image">
               <figure class="image is-4by3">
-                <img :src="'./static/img/' + project.image" alt="Image">
+                <img :src="'./static/img/' + project.img" alt="Image">
               </figure>
             </div>   
             <div class="card-content">
@@ -36,14 +36,14 @@
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4">{{ project.title }}</p>
+                  <p class="title is-4">{{ project.titulo }}</p>
                   <p class="subtitle is-6">@projeto</p>
                 </div>
               </div>
           
               <div class="content">
                 
-                {{ project.description }}
+                {{ project.descricao }}
 
                 <a>@projeto</a>.
                 <a>#categoria</a>
@@ -63,7 +63,7 @@
 </template>
 <script>
 import { bulmaComponentGenerator } from 'vue-bulma-components'
-import { listProjects } from '../../services/projects/ProjectService'
+// import { listProjects } from '../../services/projects/ProjectService'
 import menuComponent from '../menu/Menu'
 
 export default {
@@ -87,9 +87,9 @@ export default {
 
   methods: {
     fetchProjects () {
-      listProjects().then(data => {
-        this.projects = data
-      })
+      // listProjects().then(data => {
+        // this.projects = data
+      // })
     }
   },
 

@@ -1,16 +1,59 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "tcc-testes",
+  "version": "0.0.0",
+  "description": "Aplicação para estudo de caso no TCC de Testes automatizados em APIs REST",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "pm2 start process.yml",
+    "stop": "pm2 stop process.yml",
+    "restart": "pm2 restart process.yml",
+    "dev": "nodemon index.js",
+    "test": "nyc ava --serial",
+    "test:dev": "ava --verbose --serial",
+    "test:unit": "ava test/unit/**/*.spec.js --verbose",
+    "test:integ": "ava test/integration/**/*.spec.js --verbose --serial",
+    "test:dev:watch": "ava --verbose --serial --watch",
+    "test:unit:watch": "ava test/unit/**/*.spec.js --verbose --watch",
+    "test:integ:watch": "ava test/integration/**/*.spec.js --verbose --serial --watch",
+    "lint": "eslint src test || exit 0",
+    "cover": "nyc report --reporter=html"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Victor Serpa do Carmo",
+  "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3"
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "express-winston": "^2.4.0",
+    "helmet": "^3.3.0",
+    "i18n": "^0.8.3",
+    "joi": "^11.3.3",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.11",
+    "mysql2": "^1.1.2",
+    "request": "^2.81.0",
+    "request-debug": "^0.2.0",
+    "string-mask": "^0.3.0",
+    "winston": "^2.3.0",
+    "winston-firehose": "^1.0.8"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.2",
+    "eslint-plugin-import": "^2.2.0",
+    "nyc": "^11.2.1",
+    "sinon": "^4.1.1",
+    "supertest": "^3.0.0"
+  },
+  "ava": {
+    "failWithoutAssertions": false
   }
 }

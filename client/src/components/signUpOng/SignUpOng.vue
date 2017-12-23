@@ -11,80 +11,80 @@
         <tab-content title="Informações Pessoais"
                       icon="el-icon-info">
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Nome</label>
-            <input class="uk-input uk-form-width-medium" id="name" type="text" placeholder="">
+            <label class="uk-form-label" for="name">{{ name }}</label>
+            <input class="uk-input uk-form-width-medium" name="nome" id="name" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="mail">Email</label>
-            <input class="uk-input uk-form-width-medium" id="mail" type="text" placeholder="">
+            <label class="uk-form-label" for="mail">{{ email }}</label>
+            <input class="uk-input uk-form-width-medium" name="email" id="mail" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="phone">Telefone</label>
-            <input class="uk-input uk-form-width-medium" id="phone" type="text" placeholder="">
+            <label class="uk-form-label" for="phone">{{ phone }}</label>
+            <input class="uk-input uk-form-width-medium" name="telefone" id="phone" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="date">Data Nascimento</label>
-            <input class="uk-input uk-form-width-medium" id="date" type="date" placeholder="">
+            <label class="uk-form-label" for="date">{{ dataNasc }}</label>
+            <input class="uk-input uk-form-width-medium" name="dataNasc" id="date" type="date" placeholder="">
           </div>
         </tab-content>
         <tab-content title="Informações da ONG"
                       icon="el-icon-setting">
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Número de Registro na prefeitura</label>
-            <input class="uk-input uk-form-width-medium" id="townHallRegister" type="text" placeholder="">
+            <label class="uk-form-label" for="townHallRegister">{{ register }}</label>
+            <input class="uk-input uk-form-width-medium" name="numRegistroPref" id="townHallRegister" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Inscrição Estadual</label>
-            <input class="uk-input uk-form-width-medium" id="stateSubscription" type="text" placeholder="">
+            <label class="uk-form-label" for="stateSubscription">{{ insc }}</label>
+            <input class="uk-input uk-form-width-medium" name="numInscEstadual" id="stateSubscription" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Números de Funcionários</label>
-            <input class="uk-input uk-form-width-medium" id="employeesNumber" type="text" placeholder="">
+            <label class="uk-form-label" for="employeesNumber">{{ employeesNumber }}</label>
+            <input class="uk-input uk-form-width-medium" name="numFuncionarios" id="employeesNumber" type="text" placeholder="">
           </div>
 
         </tab-content>
         <tab-content title="Conclusão"
                       icon="el-icon-check">
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Endereço</label>
-            <input class="uk-input uk-form-width-medium" id="address" type="text" placeholder="">
+            <label class="uk-form-label" for="address">{{ address }}</label>
+            <input class="uk-input uk-form-width-medium" name="endereco" id="address" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Telefone</label>
-            <input class="uk-input uk-form-width-medium" id="ongPhone" type="text" placeholder="">
+            <label class="uk-form-label" for="ongPhone">Telefone</label>
+            <input class="uk-input uk-form-width-medium" name="telefoneOng" id="ongPhone" type="text" placeholder="">
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Área de atuação</label>
-            <select class="uk-select">
-                <option>Assistência Social</option>
-                <option>Cultura</option>
-                <option>Saúde</option>
-                <option>Meio Ambiente</option>
-                <option>Animal</option>
-                <option value="">Desenvolvimento e defesa de direitos</option>
-                <option value="">Habitação</option>
-                <option value="">Educação e Pesquisa</option>
+            <label class="uk-form-label" for="occupationArea">{{ occupationArea }}</label>
+            <select class="uk-select" name="areaAtuacao" id="occupationArea">
+                <option :value="assistencia">{{ assistencia }}</option>
+                <option :value="cultura">{{ cultura }}</option>
+                <option :value="saude">{{ saude }}</option>
+                <option :value="ma">{{ ma }}</option>
+                <option :value="animal">{{ animal }}</option>
+                <option :value="desenvolvimento">{{ desenvolvimento }}</option>
+                <option :value="habitacao">{{ habitacao }}</option>
+                <option :value="ep">{{ ep }}</option>
             </select>
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label" for="name">Tipo</label>
-            <select class="uk-select">
-                <option>Fundação</option>
-                <option>Organização da Sociedade Civil</option>
-                <option>Cooperativa</option>
-                <option>Organização da Sociedade Civil de Interesse Público</option>
-                <option>Organização Social</option>
-                <option value="">Instituto Empresarial</option>
-                <option value="">Entidade Beneficente De Assistência Social</option>
-                <option value="">Negócio Social</option>
+            <label class="uk-form-label" for="type">{{ ongType }}</label>
+            <select class="uk-select" name="tipoOng" id="type">
+                <option :value="fundacao">{{ fundacao }}</option>
+                <option :value="osc">{{ osc }}</option>
+                <option :value="cooperativa">{{ cooperativa }}</option>
+                <option :value="oscip">{{ oscip }}</option>
+                <option :value="os">{{ os}}</option>
+                <option :value="institutoEmp">{{ institutoEmp }}</option>
+                <option :value="ebas">{{ ebas }}</option>
+                <option :value="negocioSocial">{{ negocioSocial }}</option>
             </select>
           </div>
         </tab-content>
@@ -98,39 +98,35 @@ import router from '../../router'
 export default {
   name: 'SignUp',
 
-  // components: {
-  //   FormWizard,
-  //   TabContent
-  // },
-
   data () {
     return {
-      formInline: {
-        user: '',
-        region: ''
-      },
-      rules: {
-        user: [
-          {
-            required: true,
-            message: 'Please input Activity name',
-            trigger: 'blur'
-          },
-          {
-            min: 3,
-            max: 5,
-            message: 'Length should be 3 to 5',
-            trigger: 'blur'
-          }
-        ],
-        region: [
-          {
-            required: true,
-            message: 'Please select Activity zone',
-            trigger: 'change'
-          }
-        ]
-      }
+      name: 'Nome',
+      email: 'Email',
+      phone: 'Telefone',
+      date: 'Data Nascimento',
+      register: 'Número de Registro na Prefeitura',
+      insc: 'Inscrição estadual',
+      employeesNumber: 'Números de funcionários',
+      address: 'Endereço',
+      phoneOng: 'Telefone da ONG',
+      occupationArea: 'Área de atuação',
+      ongType: 'Tipo de ONG',
+      fundacao: 'Fundação',
+      osc: 'Organização da Sociedade Civil',
+      cooperativa: 'Cooperativa',
+      oscip: 'Organização da Sociedade Civil de Interesse Público',
+      os: 'Organização Social',
+      institutoEmp: 'Instituto Empresarial',
+      ebas: 'Entidade Beneficente De Assistência Social',
+      negocioSocial: 'Negócio Social',
+      assitencia: 'Assistência Social',
+      cultura: 'Cultura',
+      saude: 'Saúde',
+      ma: 'Meio Ambiente',
+      animal: 'Animal',
+      desenvolvimento: 'Desenvolvimento e defesa de direitos',
+      habitacao: 'Habitação',
+      ep: 'Educação e Pesquisa'
     }
   },
 
@@ -138,14 +134,14 @@ export default {
     onComplete: function () {
       alert('Requisição de conta solicitada. Em breve retornaremos!')
       router.push({ path: '/' })
-    },
-    validateFirstStep () {
-      return new Promise((resolve, reject) => {
-        this.$refs.ruleForm.validate((valid) => {
-          resolve(valid)
-        })
-      })
     }
+    // validateFirstStep () {
+    //   return new Promise((resolve, reject) => {
+    //     this.$refs.ruleForm.validate((valid) => {
+    //       resolve(valid)
+    //     })
+    //   })
+    // }
   }
 }
 </script>

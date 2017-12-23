@@ -1,0 +1,5 @@
+apps:
+  - script   : 'src/app.js'
+    name     : 'tcc-testes-api-rest'
+    exec_mode: 'cluster'
+    instances: -1 

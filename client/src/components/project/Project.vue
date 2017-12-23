@@ -63,7 +63,7 @@
 </template>
 <script>
 import { bulmaComponentGenerator } from 'vue-bulma-components'
-import { listProjects } from '../../services/projects/ProjectService' // remover após organizar o backend
+// import { listProjects } from '../../services/projects/ProjectService' // remover após organizar o backend
 import menuComponent from '../menu/Menu'
 
 export default {
@@ -93,10 +93,10 @@ export default {
 
   methods: {
     fetchProjects () {
-      listProjects()
-        .then(data => {
-          this.projects = data
-        })
+      // listProjects()
+      //   .then(data => {
+      //     this.projects = data
+      //   })
     }
   },
 

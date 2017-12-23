@@ -3,23 +3,30 @@
     <menu-component :title="title"></menu-component>
 
     <div class="wrapper">
-      <form @submit.prevent="save()">
+      <form v-on:submit.prevent="cadastrar(investment)">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
-                <input class="uk-input project-title" type="text" placeholder="Título">
+                <input class="uk-input project-title" v-model="investment.titulo" type="text" name="titulo" placeholder="Título" required>
+            </div>
+
+            <div class="uk-margin file" uk-margin>
+              <div uk-form-custom="target: true">
+                <input type="file" name="img" required>
+                <input class="uk-input uk-form-width-medium" type="text" placeholder="Selecione uma imagem" disabled>
+              </div>
             </div>
 
             <div class="uk-margin">
-                <input class="uk-input investment-value" type="number" placeholder="R$ Valor">
+                <input class="uk-input investment-value"  v-model="investment.valor" name="valor" type="number" placeholder="R$ Valor" required>
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="5" placeholder="Descrição do investimento"></textarea>
-            </div>
+                <textarea class="uk-textarea" rows="5" v-model="investment.desc" name="descricao" placeholder="Descrição do investimento" required></textarea>
+            </div>      
 
-            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label class="checks"><input class="uk-checkbox" type="checkbox" checked>Investimento fixo</label>
-                <label class="checks"><input class="uk-checkbox" type="checkbox">Investimento não fixo</label>
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" required>
+                <label class="checks"><input class="uk-radio" v-model="investment.tipoInvestimento" name="tipoFixo" type="radio" value="fixo" checked required>Investimento fixo</label>
+                <label class="checks"><input class="uk-radio" v-model="investment.tipoInvestimento" name="tipoNaoFixo" type="radio" value="naoFixo" >Investimento não fixo</label>
             </div>
         </fieldset>
 
@@ -37,6 +44,7 @@
 </template>
 <script>
 import menuComponent from '../menu/Menu'
+import { createInvestment } from '../../services/investments/InvestmentsService'
 
 export default {
   name: 'Investments',
@@ -47,22 +55,28 @@ export default {
 
   data () {
     return {
-      title: 'Investimentos'
+      title: 'Investimentos',
+      investment: {
+        titulo: '',
+        img: '',
+        valor: '',
+        desc: '',
+        tipoInvestimento: ''
+      }
     }
   },
 
   methods: {
-    save () {
-      console.log('oi')
-      // this.service.cadastra(this.foto)
-      // .then( ()=> this.foto = new Foto, err => console.log(err) );
+    cadastrar (investment) {
+      createInvestment(investment).then(res => {
+        // console.log(res)
+      })
     }
-  },
-
-  created () {
-    console.log('oi')
-    // this.service = new FotoService( this.$resource );
   }
+
+  // created () {
+  //   console.log('oi')
+  // }
 }
 </script>
 <style lang="stylus" scoped>

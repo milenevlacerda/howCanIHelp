@@ -1,0 +1,53 @@
+const { knex } = require('../config/db');
+
+const CAMPOS_INVESTIMENTOS = [
+  'Investimentos.titulo',
+  'Investimentos.img',
+  'Investimentos.categoria',
+  'Investimentos.tipoDoacao',
+];
+
+class InvestmentsModel {
+
+  static list() {
+    return knex
+      .select(CAMPOS_INVESTIMENTOS)
+      .from('Investimentos')
+  }
+
+  static search(idInvestimentos) {
+    return knex
+      .select(CAMPOS_PROJECT)
+      .from('Investimentos')
+      .where('idInvestimentos', idInvestimentos)
+      .first();
+  }
+
+  static create(data) {
+    return knex
+      .insert(data)
+      .into('Investimentos');
+  }
+
+  static edit(idInvestimentos, dados) {
+    return knex
+      .update(dados)
+      .from('Investimentos')
+      .where('idInvestimentos', idInvestimentos);
+  }
+
+  static deleteInvestment(idInvestimentos) {
+    return knex
+      .delete('*')
+      .from('Investimentos')
+      .where('idInvestimentos', idInvestimentos)
+  }
+
+  static clean() {
+    return knex
+      .delete()
+      .from('Investimentos');
+  }
+}
+
+module.exports = InvestmentModel;

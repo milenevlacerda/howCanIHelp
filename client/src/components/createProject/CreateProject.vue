@@ -3,34 +3,33 @@
     <menu-component :title="title"></menu-component>
 
     <div class="wrapper">
-      <form @submit.prevent="save()">
+      <form v-on:submit.prevent="cadastrar(project)">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
-                <input class="uk-input project-title" type="text" placeholder="Título">
+                <input class="uk-input project-title" name="titulo" v-model="project.titulo" type="text" placeholder="Título" required>
             </div>
 
             <div class="uk-margin">
-                <select class="uk-select">
-                    <option>Categoria</option>
-                    <option>Animal</option>
-                    <option>Social</option>
+                <select class="uk-select" name="categoria" v-model="project.categoria" placeholder="Categoria" required>
+                    <option value="Animal">Animal</option>
+                    <option value="Social">Social</option>
                 </select>
             </div>
 
             <div class="uk-margin file" uk-margin>
               <div uk-form-custom="target: true">
-                <input type="file">
+                <input type="file" name="img" required>
                 <input class="uk-input uk-form-width-medium" type="text" placeholder="Selecione uma imagem" disabled>
               </div>
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="5" placeholder="Descrição do projeto"></textarea>
+                <textarea class="uk-textarea" name="descricao" v-model="project.descricao" rows="5" placeholder="Descrição do projeto" required></textarea>
             </div>
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label class="checks"><input class="uk-checkbox" type="checkbox" checked>Doações financeiras</label>
-                <label class="checks"><input class="uk-checkbox" type="checkbox"> Doações de outros recursos</label>
+                <label class="checks"><input class="uk-radio" id="financeira" v-model="project.tipoDoacao" name="tipoDoacaoFinanceira" type="radio" value="financeira" checked required>Doações financeiras</label>
+                <label class="checks"><input class="uk-radio" id="outro" v-model="project.tipoDoacao" name="tipoDoacaoOutro" type="radio" value="outros" required> Doações de outros recursos</label>
             </div>
         </fieldset>
 
@@ -48,6 +47,7 @@
 </template>
 <script>
 import menuComponent from '../menu/Menu'
+import { createProject } from '../../services/project/ProjectService'
 
 export default {
   name: 'CreateProject',
@@ -58,22 +58,28 @@ export default {
 
   data () {
     return {
-      title: 'Novo Projeto'
+      title: 'Novo Projeto',
+      project: {
+        titulo: '',
+        img: '',
+        categoria: '',
+        descricao: '',
+        tipoDoacao: ''
+      }
     }
   },
 
   methods: {
-    save () {
-      console.log('oi')
-      // this.service.cadastra(this.foto)
-      // .then( ()=> this.foto = new Foto, err => console.log(err) );
+    cadastrar (project) {
+      createProject(project).then(res => {
+        // console.log(res)
+      })
     }
-  },
-
-  created () {
-    console.log('oi')
-    // this.service = new FotoService( this.$resource );
   }
+
+  // created () {
+  //   this.service = new ProjectService( this.$resource );
+  // }
 }
 </script>
 <style lang="stylus" scoped>

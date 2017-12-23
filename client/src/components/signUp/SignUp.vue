@@ -1,94 +1,148 @@
 <template>
   <div class="hello">
    <div class="wrapp">
-    <!-- <v-app id="inspire"> -->
-        <h2 class="title"> Cadastro </h2>
+      <h2 class="title">Cadastro</h2>
 
       <div class="weather-image-wrapper">
         <img src="../../assets/images/account.svg" alt="Login" class="account-image">
       </div>
-      <v-form class="wrapp-form" v-model="valid" ref="form" lazy-validation>
-        <v-text-field
-          label="Name"
-          v-model="name"
-          :rules="nameRules"
-          :counter="10"
-          required
-        ></v-text-field>
-        <v-text-field
-          label="E-mail"
-          v-model="email"
-          :rules="emailRules"
-          required
-        ></v-text-field>
-        <v-text-field
-          label="Telefone"
-          v-model="phone"
-          required
-        ></v-text-field>
-        <v-text-field
-          label="Senha"
-          v-model="pass"
-          :rules="passRules"
-          required
-        ></v-text-field>
-        
-        <div class="centered">
-          <v-btn
-            class="btn-color submitBtn"
-            @click="submit"
-            :disabled="!valid"
-          >
-            Cadastrar
-          </v-btn>
-          <v-btn class="clear" @click="clear">Limpar</v-btn>
-        </div>
-      </v-form>
-    <!-- </v-app> -->
-  </div>
+
+      <form-wizard @on-complete="cadastrar(usuario)" shape="tab" color="#03C9A9">
+        <tab-content title="Informações Pessoais"
+                      icon="el-icon-info">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">{{ name }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.dados_usuario.nome" name="nome" id="name" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="mail">{{ email }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.dados_usuario.email" name="email" id="mail" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="phone">{{ phone }}</label>
+            <input class="uk-input uk-form-width-medium" name="telefone" v-model="usuario.dados_usuario.telefone" id="phone" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="senha">{{ pass }}</label>
+            <input class="uk-input uk-form-width-medium" name="senha" v-model="usuario.dados_usuario.senha" id="senha" type="password" placeholder="" required>
+          </div>
+        </tab-content>
+        <tab-content title="Informações de Endereço"
+                      icon="el-icon-setting">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="cep">{{ cep }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.cep" name="cep" id="cep" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="street">{{ street }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.rua" name="rua" id="street" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="number">{{ number }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.numero" name="numero" id="number" type="number" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="neighborhood">{{ neighborhood }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.bairro" name="bairro" id="neighborhood" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="city">{{ city }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.cidade" name="cidade" id="city" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="state">{{ state }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.estado" name="estado" id="state" type="text" placeholder="" required>
+          </div>
+        </tab-content>
+        <tab-content title="Cartão"
+                      icon="el-icon-check">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="numCartao">{{ numCartao }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.cartao_credito.numeroCartao" name="numCartao" id="numCartao" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="nomeCartao">{{ nomeCartao }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.cartao_credito.nome" name="nomeCartao" id="nomeCartao" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="cvv">{{ cvv }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.cartao_credito.cvv" name="cvv" id="cvv" type="text" placeholder="" required>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="date">{{ vencDate }}</label>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.cartao_credito.vencimento" name="date" id="date" type="date" placeholder="" required>
+          </div>
+
+        </tab-content>
+      </form-wizard>
+    </div>
   </div>
 </template>
 <script>
+import router from '../../router'
+import { createUser } from '../../services/user/UserService'
+
 export default {
   name: 'SignUp',
 
-  data: () => ({
-    valid: true,
-    name: '',
-    nameRules: [
-      (v) => !!v || 'Nome é obrigatório',
-      (v) => v && v.length <= 10 || 'Name must be less than 10 characters'
-    ],
-    phone: '',
-    phoneRules: [
-      (v) => !!v || 'Telefone é obrigatório'
-    ],
-    pass: '',
-    passRules: [
-      (v) => !!v || 'Senha é obrigatório',
-      (v) => v && v.length <= 10 || 'Name must be less than 10 characters'
-    ],
-    email: '',
-    emailRules: [
-      (v) => !!v || 'E-mail é obrigatório',
-      (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(v) || 'E-mail deve ser válido'
-    ]
-  }),
+  data () {
+    return {
+      name: 'Nome',
+      email: 'Email',
+      phone: 'Telefone',
+      pass: 'Senha',
+      cep: 'CEP',
+      street: 'Rua',
+      number: 'Número',
+      neighborhood: 'Bairro',
+      city: 'Cidade',
+      state: 'Estado',
+      numCartao: 'Número Cartão',
+      nomeCartao: 'Nome no Cartão',
+      cvv: 'CVV',
+      vencDate: 'Data de vencimento',
+      usuario: {
+        dados_usuario: {
+          nome: '',
+          email: '',
+          senha: '',
+          telefone: ''
+        },
+        endereco: {
+          cep: '',
+          rua: '',
+          numero: '',
+          bairro: '',
+          cidade: '',
+          estado: ''
+        },
+        cartao_credito: {
+          numeroCartao: '',
+          nome: '',
+          vencimento: '',
+          cvv: ''
+        }
+      }
+    }
+  },
 
   methods: {
-    submit () {
-      // if (this.$refs.form.validate()) {
-        // Native form submission is not yet supported
-        // axios.post('/api/submit', {
-        //   name: this.name,
-        //   email: this.email,
-        //   select: this.select,
-        //   checkbox: this.checkbox
-        // })
-      // }
-    },
-    clear () {
-      this.$refs.form.reset()
+    cadastrar (usuario) {
+      createUser(usuario).then(res => {
+        // console.log(res)
+        router.push({ path: '/timeline' })
+      })
     }
   }
 }
@@ -177,5 +231,14 @@ export default {
   font-size 20px
   caret-color #fff !important
   color #fff !important
-  font-size 20px !important
+  font-size 20px !important 
+
+input 
+  border-radius 5px
+  width 100%
+
+.uk-form-label
+  display block
+  font-size 15px
+  color #36c29d
 </style>
