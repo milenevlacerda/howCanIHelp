@@ -7,7 +7,7 @@
         <img src="../../assets/images/account.svg" alt="Login" class="account-image">
       </div>
 
-      <form-wizard @on-complete="cadastrar(usuario)" shape="tab" color="#03C9A9">
+      <form-wizard @on-complete="submit(usuario)" shape="tab" color="#03C9A9">
         <tab-content title="Informações Pessoais"
                       icon="el-icon-info">
           <div class="uk-margin">
@@ -31,10 +31,10 @@
           </div>
         </tab-content>
         <tab-content title="Informações de Endereço"
-                      icon="el-icon-setting">
+                      icon="el-icon-setting" >
           <div class="uk-margin">
             <label class="uk-form-label" for="cep">{{ cep }}</label>
-            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.cep" name="cep" id="cep" type="text" placeholder="" required>
+            <input class="uk-input uk-form-width-medium" v-model="usuario.endereco.cep"  name="cep" id="cep" type="text" placeholder="" required>
           </div>
 
           <div class="uk-margin">
@@ -92,6 +92,7 @@
 <script>
 import router from '../../router'
 import { createUser } from '../../services/user/UserService'
+// import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   name: 'SignUp',
@@ -140,8 +141,9 @@ export default {
   methods: {
     cadastrar (usuario) {
       createUser(usuario).then(res => {
-        // console.log(res)
-        router.push({ path: '/timeline' })
+        if (res.contaId) {
+          router.push({ path: '/signIn' })
+        }
       })
     }
   }

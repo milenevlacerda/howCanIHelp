@@ -18,24 +18,24 @@
                 </figure>
               </div>
               <div class="media-content">
-                <p class="title is-4">Projeto 1</p>
-                <p class="subtitle is-6">@projeto</p>
+                <p class="title is-4">{{ project.titulo }}</p>
+                <p class="subtitle is-6">{{ project.ongId }}</p>
               </div>
             </div>
         
             <div class="content">
               
-              Morbi a metus. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Nullam sapien.
+              {{ project.descricao }}
 
-              <a>@projeto</a>.
-              <a>#categoria</a>
-              <a>#categoria</a>
               <br>
-              <small>09:09 AM - 25 Agosto 2017</small>
+              <p>Categoria: {{project.categoria}}</p>
+              <p>Tipo de doação: {{project.tipoDoacao}}</p>
+              <br>
 
               <ul uk-accordion>
                 <li>
                   <h3 class="uk-accordion-title item-title">{{ investments }}</h3>
+                  <!-- get do investimento do projeto -->
                   <div class="uk-accordion-content">
                       <p>R$ 200,00 - Atividade 1</p>
                       <p>R$ 250,00 - Atividade 2</p>
@@ -43,6 +43,7 @@
                       <p>R$ 1000,00 - Atividade 4</p>
                   </div>
                 </li>
+                <!-- get do doações do usuario, se houver -->
                 <li>
                   <h3 class="uk-accordion-title">{{ donations }}</h3>
                   <div class="uk-accordion-content">
@@ -53,7 +54,7 @@
               </ul>
             </div>
           </div>
-          <router-link :to="{ name: '' }">
+          <router-link :to="{ name: 'Profile',  params: { id: project.ongId } }">
             <button class="uk-button uk-button-secondary uk-button-large">Ver Perfil da ONG</button>
           </router-link>
         </div>
@@ -63,7 +64,7 @@
 </template>
 <script>
 import { bulmaComponentGenerator } from 'vue-bulma-components'
-// import { listProjects } from '../../services/projects/ProjectService' // remover após organizar o backend
+import { getProject } from '../../services/project/ProjectService'
 import menuComponent from '../menu/Menu'
 
 export default {
@@ -74,17 +75,10 @@ export default {
     'menu-component': menuComponent
   },
 
-  props: {
-    imgSrc: '',
-    projectTitle: '',
-    category: '',
-    projectDescription: '',
-    postData: ''
-  },
-
   data () {
     return {
-      projects: [],
+      project: [],
+      projectId: '',
       title: 'Projeto',
       investments: 'Últimos Investimentos da Organização',
       donations: 'Minhas Doações'
@@ -92,16 +86,15 @@ export default {
   },
 
   methods: {
-    fetchProjects () {
-      // listProjects()
-      //   .then(data => {
-      //     this.projects = data
-      //   })
+    fetchProject (idProjeto) {
+      getProject(idProjeto).then(res => {
+        this.project = res
+      })
     }
   },
 
   mounted () {
-    this.fetchProjects()
+    this.fetchProject(this.$route.params.projectId)
   },
 
   computed: {
@@ -141,6 +134,9 @@ ul
   font-weight 400
   font-size 1.1em
   color #446CB3
+
+.hide 
+  display none 
   
 </style>
 

@@ -44,41 +44,47 @@ export default new Router({
       component: SignIn
     },
     {
+      // faltou coisa
       path: '/timeline',
       name: 'Timeline',
       component: Timeline
     },
     {
+      // faltou coisa
       path: '/general',
       name: 'GeneralData',
       component: GeneralData
     },
     {
-      path: '/project',
+      path: '/project/:projectId',
       name: 'Project',
       component: Project
     },
     {
-      path: '/profile',
+      path: '/profile/:type/:id',
       name: 'Profile',
       component: Profile
     },
     {
+      // faltou coisa
       path: '/donationData',
       name: 'DonationData',
       component: DonationData
     },
     {
+      // faltou coisa
       path: '/projectData',
       name: 'ProjectData',
       component: ProjectData
     },
+      // faltou coisa
     {
       path: '/investments',
       name: 'Investments',
       component: Investments
     },
     {
+      // faltou coisa
       path: '/donationHistory',
       name: 'DonationHistory',
       component: DonationHistory

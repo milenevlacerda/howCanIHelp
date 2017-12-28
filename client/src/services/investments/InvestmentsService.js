@@ -2,12 +2,11 @@
 import Http from '../client'
 
 export const listInvestments = () => {
-  return Http.get('/investments/')
+  return Http.get('/investment')
     .then(res => res.data)
 }
 
 export const createInvestment = investment => {
-  console.log(investment)
-  // return Http.post('/investments/', investment)
-  //   .then(res => res.data)
+  return Http.post('/investment', investment)
+    .then(res => res.data)
 }

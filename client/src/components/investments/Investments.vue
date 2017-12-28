@@ -3,17 +3,37 @@
     <menu-component :title="title"></menu-component>
 
     <div class="wrapper">
+      <div v-if="success">
+        <div class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>{{ msgSuccess }}</p>
+        </div>
+      </div>
+
+      <div v-if="error">
+        <div class="uk-alert-danger" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p> {{msgError}} </p>
+        </div>
+      </div>
+
       <form v-on:submit.prevent="cadastrar(investment)">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
                 <input class="uk-input project-title" v-model="investment.titulo" type="text" name="titulo" placeholder="Título" required>
             </div>
+            
+            <div class="uk-margin">
+                <select class="uk-select" name="categoria" v-model="investment.projetoId" placeholder="Categoria" required>  
+                    <option v-for="project in projects" :key="project.id" :value="project.id">{{ project.titulo }}</option>
+                </select>
+            </div>
 
             <div class="uk-margin file" uk-margin>
-              <div uk-form-custom="target: true">
-                <input type="file" name="img" required>
-                <input class="uk-input uk-form-width-medium" type="text" placeholder="Selecione uma imagem" disabled>
-              </div>
+                <file-base64 
+                  v-bind:done="getFiles"
+                  required>
+                </file-base64>
             </div>
 
             <div class="uk-margin">
@@ -21,12 +41,12 @@
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="5" v-model="investment.desc" name="descricao" placeholder="Descrição do investimento" required></textarea>
+                <textarea class="uk-textarea" rows="5" v-model="investment.descricao" name="descricao" placeholder="Descrição do investimento" required></textarea>
             </div>      
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" required>
-                <label class="checks"><input class="uk-radio" v-model="investment.tipoInvestimento" name="tipoFixo" type="radio" value="fixo" checked required>Investimento fixo</label>
-                <label class="checks"><input class="uk-radio" v-model="investment.tipoInvestimento" name="tipoNaoFixo" type="radio" value="naoFixo" >Investimento não fixo</label>
+                <label class="checks"><input class="uk-radio" v-model="investment.tipo" name="tipoFixo" type="radio" value="fixo" checked>Investimento fixo</label>
+                <label class="checks"><input class="uk-radio" v-model="investment.tipo" name="tipoNaoFixo" type="radio" value="naoFixo" >Investimento não fixo</label>
             </div>
         </fieldset>
 
@@ -44,24 +64,33 @@
 </template>
 <script>
 import menuComponent from '../menu/Menu'
+import fileBase64 from 'vue-file-base64'
 import { createInvestment } from '../../services/investments/InvestmentsService'
+import { listProjects } from '../../services/project/ProjectService'
 
 export default {
   name: 'Investments',
 
   components: {
-    'menu-component': menuComponent
+    'menu-component': menuComponent,
+    fileBase64
   },
 
   data () {
     return {
       title: 'Investimentos',
+      success: '',
+      error: '',
+      msgSuccess: 'Projeto Cadastrado com sucesso! :)',
+      msgError: 'Ops, houve algum erro :(, tente novamente',
+      projects: '',
       investment: {
         titulo: '',
-        img: '',
         valor: '',
-        desc: '',
-        tipoInvestimento: ''
+        capa: '',
+        descricao: '',
+        tipo: 'fixo',
+        projetoId: ''
       }
     }
   },
@@ -69,14 +98,31 @@ export default {
   methods: {
     cadastrar (investment) {
       createInvestment(investment).then(res => {
-        // console.log(res)
+        if (res.investmentId) {
+          this.$data.success = true
+          return
+        }
+        this.$data.error = true
+      })
+    },
+
+    getFiles (files) {
+      // DESCOMENTAR ISSO DEPOIS QUE O DB FICAR OK P BASE64
+      // this.$data.investment.capa = files.base64
+      this.$data.investment.capa = 'asd'
+    },
+
+    fetchProjects () {
+      listProjects().then(res => {
+        this.projects = res
       })
     }
-  }
+  },
 
-  // created () {
-  //   console.log('oi')
-  // }
+  mounted () {
+    this.$data.tipo = window.localStorage.getItem('tipo')
+    this.fetchProjects()
+  }
 }
 </script>
 <style lang="stylus" scoped>

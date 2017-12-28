@@ -5,18 +5,23 @@
       <div class="weather-image-wrapper">
         <img src="../../assets/images/user.svg" alt="Login" class="account-image">
       </div>
-      <form-wizard @on-complete="submit(dadosUsuario)" shape="tab" ref="form" color="#03C9A9">
+      <form-wizard @on-validate="submit(dadosUsuario, isValid)" shape="tab" color="#03C9A9">
         <tab-content title="Dados de Login"
-                      icon="el-icon-info">
-
+                      icon="el-icon-info" :before-change="()=>validate()">
+          
+          <div class="help-block form-error" v-if="formError">{{ msg }}</div>
+          
           <div class="uk-margin">
             <label class="uk-form-label" for="mail">{{ email }}</label>
-            <input class="uk-input uk-form-width-medium" v-model="dadosUsuario.email" name="email" id="mail" type="text" placeholder="" required>
+            <input class="uk-input uk-form-width-medium form-control" v-model="dadosUsuario.email" @input="$v.dadosUsuario.email.$touch()" name="email" id="mail" type="text" placeholder="" required>
+            <span class="help-block" v-if="$v.dadosUsuario.email.$error && !$v.dadosUsuario.email.required">Email é obrigatório</span>
+            <span class="help-block" v-if="$v.dadosUsuario.email.$error && !$v.dadosUsuario.email.email">Email deve ser válido</span>
           </div>
 
           <div class="uk-margin">
             <label class="uk-form-label" for="senha">{{ pass }}</label>
-            <input class="uk-input uk-form-width-medium" name="senha" v-model="dadosUsuario.password" id="senha" type="password" placeholder="" required>
+            <input class="uk-input uk-form-width-medium form-control" name="senha" @input="$v.dadosUsuario.senha.$touch()" v-model="dadosUsuario.senha" id="senha" type="password" placeholder="" required>
+            <span class="help-block" v-if="$v.dadosUsuario.senha.$error && !$v.dadosUsuario.senha.required">Senha é obrigatório</span>
           </div>
         </tab-content>
       </form-wizard>
@@ -24,8 +29,9 @@
   </div>
 </template>
 <script>
-// import router from '../../router'
+import router from '../../router'
 import { consultUser } from '../../services/user/UserService'
+import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   name: 'SignIn',
@@ -34,27 +40,50 @@ export default {
     return {
       email: 'Email',
       pass: 'Senha',
-      valid: true,
+      isValid: '',
+      formError: '',
+      msg: '',
       dadosUsuario: {
-        password: '',
-        email: ''
+        email: '',
+        senha: ''
+      }
+    }
+  },
+
+  validations: {
+    dadosUsuario: {
+      email: {
+        required,
+        email
       },
-      passRules: [
-        (v) => !!v || 'Senha é obrigatório'
-      ],
-      emailRules: [
-        (v) => !!v || 'E-mail é obrigatório',
-        (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(v) || 'E-mail deve ser válido'
-      ]
+      senha: {
+        required
+      }
     }
   },
 
   methods: {
-    submit (dadosUsuario) {
-      consultUser(dadosUsuario).then(res => {
-        // console.log(res)
-        // router.push({ path: '/timeline' })
-      })
+    validate () {
+      this.$v.dadosUsuario.$touch()
+      this.$data.isValid = !this.$v.dadosUsuario.$invalid
+      this.$emit('on-validate', this.$data.dadosUsuario, this.$data.isValid)
+      return this.$data.isValid
+    },
+
+    submit (dadosUsuario, isValid) {
+      if (isValid) {
+        consultUser(dadosUsuario).then(res => {
+          if (res.token && res.tipo) {
+            this.$data.formError = false
+            window.localStorage.setItem('token', res.token)
+            window.localStorage.setItem('tipo', res.tipo)
+            router.push({ path: '/timeline' })
+          } else {
+            this.$data.formError = true
+            this.$data.msg = res.mensagem
+          }
+        })
+      }
     }
   }
 }
@@ -153,4 +182,10 @@ input
   display block
   font-size 15px
   color #36c29d
+
+.form-error
+  font-size 18px
+  color #F03434
+  font-weight 500
+  text-align center
 </style>

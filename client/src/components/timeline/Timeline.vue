@@ -22,10 +22,10 @@
       
       <ul class="wrapper-card uk-switcher uk-margin">
         <li>
-          <div v-for="project in projects" :key="project.idProjeto" class="card">
+          <div v-for="project in projects" :key="project.id" class="card">
             <div class="card-image">
               <figure class="image is-4by3">
-                <img :src="'./static/img/' + project.img" alt="Image">
+                <img :src="'./static/img/' + project.capa" alt="Image">
               </figure>
             </div>   
             <div class="card-content">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="media-content">
                   <p class="title is-4">{{ project.titulo }}</p>
-                  <p class="subtitle is-6">@projeto</p>
+                  <p class="subtitle is-6">{{ project.ongId }}</p>
                 </div>
               </div>
           
@@ -45,14 +45,14 @@
                 
                 {{ project.descricao }}
 
-                <a>@projeto</a>.
-                <a>#categoria</a>
-                <a>#categoria</a>
                 <br>
-                <small>09:09 AM - 25 Agosto 2017</small>
+                <p>Categoria: {{project.categoria}}</p>
+                <p>Tipo de doação: {{project.tipoDoacao}}</p>
+                <br>
               </div>
             </div>
-            <router-link :to="{ name: 'Project' }">
+            <router-link 
+              :to="{ name: 'Project',  params: { projectId: project.id } }">
               <button class="uk-button uk-button-secondary uk-button-large">Ver Mais</button>
             </router-link>
           </div>
@@ -63,7 +63,7 @@
 </template>
 <script>
 import { bulmaComponentGenerator } from 'vue-bulma-components'
-// import { listProjects } from '../../services/projects/ProjectService'
+import { listProjects } from '../../services/project/ProjectService'
 import menuComponent from '../menu/Menu'
 
 export default {
@@ -77,23 +77,25 @@ export default {
   data () {
     return {
       projects: [],
+      tipo: '',
       title: 'Projetos',
       filters: {
-        all: 'all',
-        animals: 'animals'
+        all: 'Todos',
+        animals: 'Apoiados'
       }
     }
   },
 
   methods: {
     fetchProjects () {
-      // listProjects().then(data => {
-        // this.projects = data
-      // })
+      listProjects().then(res => {
+        this.projects = res
+      })
     }
   },
 
   mounted () {
+    this.$data.tipo = window.localStorage.getItem('tipo')
     this.fetchProjects()
   },
 

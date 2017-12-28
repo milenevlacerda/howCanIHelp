@@ -10,7 +10,7 @@
     </vulma-navbar>
     <vulma-drawer ref='drawer'>
       <vulma-drawerheader name='Milene ' email='milenelacerda@icloud.com ' avatar='' color='custom-hulk '></vulma-drawerheader>
-      <vulma-menu>
+      <vulma-menu v-if="tipoUser == 'user'">
         <vulma-menuitem icon="fa-home">
             <router-link class="link-inline" :to="{ name: 'Timeline' }">
               {{ timelineTitle }}
@@ -21,6 +21,39 @@
           <router-link :to="{ name: 'Profile' }">
             {{ profileTitle }}
           </router-link>
+        </vulma-menuitem>
+
+        <vulma-menuitem icon="fa-cog">
+          <router-link :to="{ name: 'GeneralData' }">
+            {{ configTitle }}
+          </router-link>  
+        </vulma-menuitem>
+
+        <vulma-menuitem icon="fa-clock-o">
+          <router-link :to="{ name: 'DonationHistory' }">
+            {{ donationHistory }}
+          </router-link>
+        </vulma-menuitem>
+
+      </vulma-menu>
+
+      <vulma-menu v-if="tipoUser == 'ngo'">
+        <vulma-menuitem icon="fa-home">
+            <router-link class="link-inline" :to="{ name: 'Timeline' }">
+              {{ timelineTitle }}
+            </router-link>  
+        </vulma-menuitem>
+
+        <vulma-menuitem icon='fa-user'>
+          <router-link :to="{ name: 'Profile' }">
+            {{ profileTitle }}
+          </router-link>
+        </vulma-menuitem>
+
+        <vulma-menuitem icon="fa-cog">
+          <router-link :to="{ name: 'GeneralData' }">
+            {{ configTitle }}
+          </router-link>  
         </vulma-menuitem>
 
         <vulma-menuitem icon="fa-plus">
@@ -35,25 +68,14 @@
           </router-link>
         </vulma-menuitem>
 
-        <vulma-menuitem icon="fa-cog">
-          <router-link :to="{ name: 'GeneralData' }">
-            {{ configTitle }}
-          </router-link>  
-        </vulma-menuitem>
-
         <vulma-menuitem icon="fa-money">
           <router-link :to="{ name: 'Investments' }">
             {{ investments }}
           </router-link>
         </vulma-menuitem>
-
-        <vulma-menuitem icon="fa-clock-o">
-          <router-link :to="{ name: 'DonationHistory' }">
-            {{ donationHistory }}
-          </router-link>
-        </vulma-menuitem>
-
+  
       </vulma-menu>
+
     </vulma-drawer>
   </div>  
 </template>
@@ -65,6 +87,7 @@ export default {
 
   data () {
     return {
+      tipoUser: '',
       projects: [],
       timelineTitle: 'Home',
       profileTitle: 'Perfil',
@@ -74,6 +97,11 @@ export default {
       projectsDataTitle: 'Dados de Doações',
       donationHistory: 'Histórico de Doações'
     }
+  },
+
+  mounted () {
+    // this.fetchProjects()
+    this.$data.tipoUser = window.localStorage.getItem('tipo')
   }
 }
 </script>

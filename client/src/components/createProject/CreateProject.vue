@@ -3,6 +3,20 @@
     <menu-component :title="title"></menu-component>
 
     <div class="wrapper">
+      <div v-if="success">
+        <div class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>{{ msgSuccess }}</p>
+        </div>
+      </div>
+
+      <div v-if="error">
+        <div class="uk-alert-danger" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p> {{msgError}} </p>
+        </div>
+      </div>
+
       <form v-on:submit.prevent="cadastrar(project)">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
@@ -11,25 +25,26 @@
 
             <div class="uk-margin">
                 <select class="uk-select" name="categoria" v-model="project.categoria" placeholder="Categoria" required>
+                    <option selected disabled>Categoria</option>
                     <option value="Animal">Animal</option>
                     <option value="Social">Social</option>
                 </select>
             </div>
 
             <div class="uk-margin file" uk-margin>
-              <div uk-form-custom="target: true">
-                <input type="file" name="img" required>
-                <input class="uk-input uk-form-width-medium" type="text" placeholder="Selecione uma imagem" disabled>
-              </div>
+                <file-base64 
+                  v-bind:done="getFiles"
+                  required>
+                </file-base64>
             </div>
 
             <div class="uk-margin">
                 <textarea class="uk-textarea" name="descricao" v-model="project.descricao" rows="5" placeholder="Descrição do projeto" required></textarea>
             </div>
 
-            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label class="checks"><input class="uk-radio" id="financeira" v-model="project.tipoDoacao" name="tipoDoacaoFinanceira" type="radio" value="financeira" checked required>Doações financeiras</label>
-                <label class="checks"><input class="uk-radio" id="outro" v-model="project.tipoDoacao" name="tipoDoacaoOutro" type="radio" value="outros" required> Doações de outros recursos</label>
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" required>
+                <label class="checks"><input class="uk-radio" v-model="project.tipoDoacao" name="tipoDoacao" type="radio" value="financeira" checked>Doações financeiras</label>
+                <label class="checks"><input class="uk-radio" v-model="project.tipoDoacao" name="tipoDoacao" type="radio" value="outros"> Doações de outros recursos</label>
             </div>
         </fieldset>
 
@@ -47,24 +62,29 @@
 </template>
 <script>
 import menuComponent from '../menu/Menu'
+import fileBase64 from 'vue-file-base64'
 import { createProject } from '../../services/project/ProjectService'
 
 export default {
   name: 'CreateProject',
-
   components: {
-    'menu-component': menuComponent
+    'menu-component': menuComponent,
+    fileBase64
   },
 
   data () {
     return {
       title: 'Novo Projeto',
+      success: '',
+      error: '',
+      msgSuccess: 'Projeto Cadastrado com sucesso! :)',
+      msgError: 'Ops, houve algum erro :(, tente novamente',
       project: {
         titulo: '',
-        img: '',
-        categoria: '',
+        categoria: 'Categoria',
+        capa: '',
         descricao: '',
-        tipoDoacao: ''
+        tipoDoacao: 'financeira'
       }
     }
   },
@@ -72,14 +92,20 @@ export default {
   methods: {
     cadastrar (project) {
       createProject(project).then(res => {
-        // console.log(res)
+        if (res.projectId) {
+          this.$data.success = true
+          return
+        }
+        this.$data.error = true
       })
+    },
+
+    getFiles (files) {
+      // DESCOMENTAR ISSO DEPOIS QUE O DB FICAR OK P BASE64
+      // this.$data.project.capa = files.base64
+      this.$data.project.capa = 'asd'
     }
   }
-
-  // created () {
-  //   this.service = new ProjectService( this.$resource );
-  // }
 }
 </script>
 <style lang="stylus" scoped>

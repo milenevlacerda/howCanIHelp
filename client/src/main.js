@@ -10,6 +10,7 @@ import Vuetify from 'vuetify'
 import ElementUI from 'element-ui'
 import VueChartJS from 'vue-chartjs'
 import VueFormWizard from 'vue-form-wizard'
+import Vuelidate from 'vuelidate'
 
 import 'uikit/dist/css/uikit.min.css'
 import 'uikit/dist/js/uikit.min.js'
@@ -25,6 +26,7 @@ import './assets/css/new-styles.css'
 
 Vue.config.productionTip = false
 
+Vue.use(Vuelidate)
 Vue.use(Vulma)
 Vue.use(Notifications)
 Vue.use(vueBulmaComponents)
