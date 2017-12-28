@@ -5,8 +5,21 @@ const _ = require('lodash');
 const AccountRepository = require('../repositories/AccountRepository');
 const AddressRepository = require('../repositories/AddressRepository');
 const NgoRepository = require('../repositories/NgoRepository');
+const ProjectRepository = require('../repositories/ProjectRepository');
 
 class NgoService extends EventEmitter {
+
+  async get(ngoId) {
+    try {
+      const ngo = await NgoRepository.get(ngoId);
+
+      ngo.projetos = await ProjectRepository.getFromNgo(ngoId);
+
+      this.emit('SUCCESS', ngo);
+    } catch (error) {
+      this.emit('ERROR', error);
+    }
+  }
 
   async create(data) {
     try {

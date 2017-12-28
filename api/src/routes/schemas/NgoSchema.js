@@ -2,6 +2,15 @@ const Joi = require('joi');
 const RouteValidator = require('../../middlewares/RouteValidator');
 
 class NgoSchema extends RouteValidator {
+  static get get() {
+    const schema = {
+      params: Joi.object().keys({
+        ngoId: Joi.string().required(),
+      }),
+    };
+
+    return this.validate(schema);
+  }
 
   static get post() {
     const schema = {

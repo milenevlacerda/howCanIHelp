@@ -10,6 +10,10 @@ class ProjectRepository {
     return ProjectModel.get(projectId);
   }
 
+  static getFromNgo(ngoId) {
+    return ProjectModel.getFromNgo(ngoId);
+  }
+
   static async create(data) {
     try {
       const [projectId] = await ProjectModel.create(data);

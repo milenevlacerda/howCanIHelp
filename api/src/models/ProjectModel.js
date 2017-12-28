@@ -16,6 +16,13 @@ class ProjectModel {
       .first();
   }
 
+  static getFromNgo(ngoId) {
+    return knex
+      .select('*')
+      .from('Projeto')
+      .where('Projeto.ongId', ngoId);
+  }
+
   static create(data) {
     return knex
       .insert(data)
