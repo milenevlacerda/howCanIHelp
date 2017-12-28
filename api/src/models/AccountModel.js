@@ -2,11 +2,22 @@ const { knex } = require('../config/db');
 
 class AccountModel {
 
-  static get(data) {
+  static getByEmailAndPassword(email, password) {
     return knex
       .select()
       .from('Conta')
-      .where(data)
+      .where({
+        email,
+        senha: password,
+      })
+      .first();
+  }
+
+  static get(accountId) {
+    return knex
+      .select()
+      .from('Conta')
+      .where('id', accountId)
       .first();
   }
 

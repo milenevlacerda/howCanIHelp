@@ -7,11 +7,11 @@ class UserModel {
       .from('Usuario');
   }
 
-  static get(data) {
+  static get(accountId) {
     return knex
       .select()
       .from('Usuario')
-      .where(data)
+      .where('ContaId', accountId)
       .first();
   }
 

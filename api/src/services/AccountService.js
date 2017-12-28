@@ -1,21 +1,37 @@
-const AccountModel = require('../models/AccountModel');
+const EventEmitter = require('events');
+const _ = require('lodash');
 
-class AccountService {
+// Repositories
+const AccountRepository = require('../repositories/AccountRepository');
+const UserRepository = require('../repositories/UserRepository');
+const NgoRepository = require('../repositories/NgoRepository');
 
-  static get(data) {
-    return AccountModel.get(data);
-  }
+class AccountService extends EventEmitter {
 
-  static async create(data) {
-    try {
-      const dbIds = await AccountModel.create(data);
+  async get(accountId) {
+    try {      
+      const account = await AccountRepository.get(accountId);
+      let conta;
 
-      return dbIds[0];
+      if (!account) {
+        this.emit('NOT_FOUND');
+        return;
+      }
+
+      const user = await UserRepository.get(accountId);
+      const ngo = await NgoRepository.get(accountId);
+
+      if (user) {
+        conta = { conta: account, usuario: user };
+      } else if (ngo) {
+        conta = { conta: account, ONG: ngo };
+      }
+
+      this.emit('SUCCESS', conta);
     } catch (error) {
-      throw error;
+      this.emit('ERROR', error);
     }
   }
-
 }
 
 module.exports = AccountService;

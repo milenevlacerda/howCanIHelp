@@ -1,15 +1,17 @@
 const EventEmitter = require('events');
 const TokenHelper = require('../helpers/Token');
-const AccountService = require('./AccountService');
-const SessionService = require('./SessionService');
-const UserService = require('./UserService');
-const OngService = require('./OngService');
+
+// Repositories
+const AccountRepository = require('../repositories/AccountRepository');
+const SessionRepository = require('../repositories/SessionRepository');
+const UserRepository = require('../repositories/UserRepository');
+const NgoRepository = require('../repositories/NgoRepository');
 
 class LoginService extends EventEmitter {
 
   async login(data) {
     try {
-      const conta = await AccountService.get(data);
+      const conta = await AccountRepository.getByEmailAndPassword(data.email, data.senha);
 
       if (!conta) {
         this.emit('ACCOUNT_NOT_EXIST');
@@ -23,16 +25,16 @@ class LoginService extends EventEmitter {
         contaId: conta.id,
       };
 
-      await SessionService.create(sessao);
+      await SessionRepository.create(sessao);
 
-      const user = await UserService.get({ contaId: conta.id });
-      const ong = await OngService.get({ contaId: conta.id });
+      const user = await UserRepository.get(conta.id);
+      const ngo = await NgoRepository.get(conta.id);
 
-      if (!user && !ong) {
+      if (!user && !ngo) {
         this.emit('ERROR');
       }
 
-      const tipo = user ? 'user' : 'ong';
+      const tipo = user ? 'user' : 'ngo';
 
       this.emit('SUCCESS', token, tipo);
     } catch (error) {

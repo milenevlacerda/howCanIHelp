@@ -1,25 +1,18 @@
 const { knex } = require('../config/db');
 
-const CAMPOS_PROJETO = [
-  'Projeto.titulo',
-  'Projeto.img',
-  'Projeto.categoria',
-  'Projeto.tipoDoacao',
-];
-
 class ProjectModel {
 
   static list() {
     return knex
-      .select(CAMPOS_PROJETO)
-      .from('Projeto')
+      .select()
+      .from('Projeto');
   }
 
-  static search(idProjeto) {
+  static get(projectId) {
     return knex
-      .select(CAMPOS_PROJETO)
+      .select()
       .from('Projeto')
-      .where('idProjeto', idProjeto)
+      .where('Projeto.id', projectId)
       .first();
   }
 
@@ -29,25 +22,25 @@ class ProjectModel {
       .into('Projeto');
   }
 
-  static edit(idProjeto, dados) {
-    return knex
-      .update(dados)
-      .from('Projeto')
-      .where('idProjeto', idProjeto);
-  }
+  // static edit(idProjeto, dados) {
+  //   return knex
+  //     .update(dados)
+  //     .from('Projeto')
+  //     .where('idProjeto', idProjeto);
+  // }
 
-  static deleteProject(idProjeto) {
-    return knex
-      .delete('*')
-      .from('Projeto')
-      .where('idProjeto', idProjeto)
-  }
+  // static deleteProject(idProjeto) {
+  //   return knex
+  //     .delete('*')
+  //     .from('Projeto')
+  //     .where('idProjeto', idProjeto)
+  // }
 
-  static clean() {
-    return knex
-      .delete()
-      .from('Projeto');
-  }
+  // static clean() {
+  //   return knex
+  //     .delete()
+  //     .from('Projeto');
+  // }
 }
 
 module.exports = ProjectModel;

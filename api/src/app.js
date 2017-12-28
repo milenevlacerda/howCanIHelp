@@ -11,7 +11,11 @@ const i18n = require('./config/i18n');
 
 /* Routes */
 const userRoutes = require('./routes/user');
+const ngoRoutes = require('./routes/ngo');
 const loginRoutes = require('./routes/login');
+const projectRoutes = require('./routes/project');
+const investmentRoutes = require('./routes/investment');
+const accountRoutes = require('./routes/account');
 
 /* Express initialization */
 const app = express();
@@ -39,6 +43,10 @@ app.get('/', (req, res) => {
 /* Instatiate routes */
 app.use('/user', userRoutes);
 app.use('/login', loginRoutes);
+app.use('/ngo', ngoRoutes);
+app.use('/project', projectRoutes);
+app.use('/investment', investmentRoutes);
+app.use('/account', accountRoutes);
 
 /* Log errors */
 LoggerConfig.expressError(app);

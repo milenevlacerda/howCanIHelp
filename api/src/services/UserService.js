@@ -1,26 +1,21 @@
 const EventEmitter = require('events');
 const _ = require('lodash');
-const UserModel = require('../models/UserModel');
-const AddressService = require('../services/AddressService');
-const CreditCardService = require('../services/CreditCardService');
-const AccountService = require('../services/AccountService');
+
+// Repositories
+const UserRepository = require('../repositories/UserRepository');
+const AddressRepository = require('../repositories/AddressRepository');
+const CreditCardRepository = require('../repositories/CreditCardRepository');
+const AccountRepository = require('../repositories/AccountRepository');
 
 class UserService extends EventEmitter {
-  // static listar() {
-  //   return UserModel.listar();
-  // }
-
-  static get(data) {
-    return UserModel.get(data);
-  }
 
   async create(data) {
     try {
-      const contaId = await AccountService.create(data.dados_usuario);
-      const cartaoId = await CreditCardService.create(data.cartao_credito)
+      const contaId = await AccountRepository.create(data.dados_usuario);
+      const cartaoId = await CreditCardRepository.create(data.cartao_credito)
 
-      await UserModel.create({ contaId, cartaoId });
-      await AddressService.create(_.merge(data.endereco, { contaId }));
+      await UserRepository.create({ contaId, cartaoId });
+      await AddressRepository.create(_.merge(data.endereco, { contaId }));
 
       this.emit('SUCCESS', contaId);
     } catch (error) {
@@ -32,34 +27,6 @@ class UserService extends EventEmitter {
       this.emit('ERROR', error);
     }
   }
-
-  // static async editar(matricula, dados) {
-  //   try {
-  //     const edicao = await UserModel.editar(matricula, dados);
-
-  //     if (edicao) {
-  //       return true;
-  //     }
-
-  //     return false;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
-  // static async excluir(matricula) {
-  //   try {
-  //     const delecao = await UserModel.excluir(matricula);
-
-  //     if (delecao) {
-  //       return true;
-  //     }
-
-  //     return false;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 }
 
 module.exports = UserService;

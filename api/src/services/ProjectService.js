@@ -1,51 +1,89 @@
-const ProjectModel = require('../models/ProjectModel');
+const EventEmitter = require('events');
+const _ = require('lodash');
 
-class ProjectService {
-  static listar() {
-    return ProjectModel.listar();
-  }
+// Repositories
+const ProjectRepository = require('../repositories/ProjectRepository');
+const InvestmentRepository = require('../repositories/InvestmentRepository');
+const DonationRepository = require('../repositories/DonationRepository');
 
-  static obter(idProjeto) {
-    return ProjectModel.obter(idProjeto);
-  }
+class ProjectService extends EventEmitter {
 
-  static async criar(dados) {
+  async list() {
     try {
-      const dbIds = await ProjectModel.criar(dados);
+      const projectList = await ProjectRepository.list();
 
-      return dbIds[0];
+      this.emit('SUCCESS', projectList);
     } catch (error) {
-      throw error;
+      this.emit('ERROR', error);
     }
   }
 
-  static async editar(idProjeto, dados) {
+  async get(projectId, userId) {
     try {
-      const edicao = await ProjectModel.editar(idProjeto, dados);
+      const project = await ProjectRepository.get(projectId);
 
-      if (edicao) {
-        return true;
+      if (project) {
+        project.investimentos = await InvestmentRepository.getOfProject(projectId);
+        project.doacoes = await DonationRepository.getOfProject(projectId, userId);
       }
 
-      return false;
+      this.emit('SUCCESS', project);
     } catch (error) {
-      throw error;
+      this.emit('ERROR', error);
     }
   }
 
-  static async excluir(idProjeto) {
+  async create(data, ngoId) {
     try {
-      const delecao = await ProjectModel.excluir(idProjeto);
+      const project = _.merge(data, {
+        ongId: ngoId,
+      });
 
-      if (delecao) {
-        return true;
-      }
+      const projectId = await ProjectRepository.create(project);
 
-      return false;
+      this.emit('SUCCESS', projectId);
     } catch (error) {
-      throw error;
+      this.emit('ERROR', error);
     }
   }
+
+  // static async criar(dados) {
+  //   try {
+  //     const dbIds = await ProjectModel.criar(dados);
+
+  //     return dbIds[0];
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  // static async editar(idProjeto, dados) {
+  //   try {
+  //     const edicao = await ProjectModel.editar(idProjeto, dados);
+
+  //     if (edicao) {
+  //       return true;
+  //     }
+
+  //     return false;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  // static async excluir(idProjeto) {
+  //   try {
+  //     const delecao = await ProjectModel.excluir(idProjeto);
+
+  //     if (delecao) {
+  //       return true;
+  //     }
+
+  //     return false;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }
 
 module.exports = ProjectService;
