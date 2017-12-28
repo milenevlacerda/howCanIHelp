@@ -14,6 +14,9 @@ router.get('/:projectId', Auth.validate, ProjectSchema.get, ProjectController.ge
 /* POST /project */
 router.post('/', Auth.validate, ProjectSchema.post, ProjectController.post);
 
+/* POST /project/:projectId/donnation */
+router.post('/:projectId/donnation', Auth.validate, ProjectSchema.postDonnation, ProjectController.postDonnation);
+
 /* PUT /project/:projectId */
 // router.put('/:projectId', ProjectSchema.put, ProjectController.put);
 

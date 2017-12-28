@@ -10,6 +10,12 @@ class DonationModel {
       .where('usuarioId', userId);
   }
 
+  static create(data) {
+    return knex
+      .insert(data)
+      .into('Doacao');
+  }
+
   // static list() {
   //   return knex
   //     .select(CAMPOS_DOACAO)
@@ -22,12 +28,6 @@ class DonationModel {
   //     .from('Doacao')
   //     .where('idUser', idUser)
   //     .first();
-  // }
-
-  // static create(data) {
-  //   return knex
-  //     .insert(data)
-  //     .into('Doacao');
   // }
 
   // static clean() {

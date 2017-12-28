@@ -9,6 +9,16 @@ class DonationRepository {
 
     return DonationModel.getOfProject(projectId, userId);
   }
+
+  static async create(data) {
+    try {
+      const [donationId] = await DonationModel.create(data);
+
+      return donationId;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = DonationRepository;

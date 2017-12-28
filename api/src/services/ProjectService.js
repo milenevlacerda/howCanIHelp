@@ -47,6 +47,16 @@ class ProjectService extends EventEmitter {
     }
   }
 
+  async donation(data) {
+    try {
+      const donationId = await DonationRepository.create(data);
+      
+      this.emit('SUCCESS', donationId);
+    } catch(error) {
+      this.emit('ERROR', error);
+    }
+  }
+
   // static async criar(dados) {
   //   try {
   //     const dbIds = await ProjectModel.criar(dados);
