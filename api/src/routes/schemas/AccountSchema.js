@@ -8,6 +8,12 @@ class AccountSchema extends RouteValidator {
 
     return this.validate(schema);
   }
+
+  static get getDonations() {
+    const schema = {};
+
+    return this.validate(schema);
+  }
 }
 
 module.exports = AccountSchema;

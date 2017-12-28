@@ -20,6 +20,28 @@ class AccountController {
 
     accountService.get(accountId);
   }
+
+  static getDonations(req, res) {
+    if (res.locals.conta.isNgo) {
+      res.status(400).send({
+        message: 'Ong não pode fazer doações',
+      });
+      return;
+    }
+
+    const userId = res.locals.conta.id;
+    const accountService = new AccountService();
+
+    accountService
+      .on('SUCCESS', (donations) => {
+        res.send(donations);
+      })
+      .on('ERROR', (error) => {
+        Logger.throw(res, '2365958507', error);
+      });
+
+    accountService.getDonations(userId);
+  }
 }
 
 module.exports = AccountController;

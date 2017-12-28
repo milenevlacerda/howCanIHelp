@@ -2,22 +2,22 @@ const Joi = require('joi');
 const RouteValidator = require('../../middlewares/RouteValidator');
 
 class UserSchema extends RouteValidator {
-  static get list() {
-    const schema = {};
+  // static get list() {
+  //   const schema = {};
 
-    return this.validate(schema);
-  }
+  //   return this.validate(schema);
+  // }
 
-  static get get() {
-    const schema = {
-      params: Joi.object().keys({
-        password: Joi.string().required(),
-        email: Joi.string().required(),
-      }),
-    };
+  // static get get() {
+  //   const schema = {
+  //     params: Joi.object().keys({
+  //       password: Joi.string().required(),
+  //       email: Joi.string().required(),
+  //     }),
+  //   };
 
-    return this.validate(schema);
-  }
+  //   return this.validate(schema);
+  // }
 
   static get post() {
     const schema = {

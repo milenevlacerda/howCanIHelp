@@ -5,7 +5,10 @@ const AccountSchema = require('../routes/schemas/AccountSchema');
 
 const router = express.Router({ mergeParams: true });
 
-/* POST /ngo */
+/* GET /account */
 router.get('/', Auth.validate, AccountSchema.get, AccountController.get);
+
+/* GET /account/donations */
+router.get('/donations', Auth.validate, AccountSchema.getDonations, AccountController.getDonations);
 
 module.exports = router;

@@ -14,6 +14,10 @@ class DonationRepository {
     return DonationModel.getFromProject(projectId);
   }
 
+  static getFromUser(userId) {
+    return DonationModel.getFromUser(userId);
+  }
+
   static async create(data) {
     try {
       const [donationId] = await DonationModel.create(data);

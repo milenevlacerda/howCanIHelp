@@ -5,6 +5,7 @@ const _ = require('lodash');
 const AccountRepository = require('../repositories/AccountRepository');
 const UserRepository = require('../repositories/UserRepository');
 const NgoRepository = require('../repositories/NgoRepository');
+const DonationRepository = require('../repositories/DonationRepository');
 
 class AccountService extends EventEmitter {
 
@@ -28,6 +29,16 @@ class AccountService extends EventEmitter {
       }
 
       this.emit('SUCCESS', conta);
+    } catch (error) {
+      this.emit('ERROR', error);
+    }
+  }
+
+  async getDonations(userId) {
+    try {
+      const donations = await DonationRepository.getFromUser(userId);
+
+      this.emit('SUCCESS', donations);
     } catch (error) {
       this.emit('ERROR', error);
     }
