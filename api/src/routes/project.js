@@ -14,8 +14,11 @@ router.get('/:projectId', Auth.validate, ProjectSchema.get, ProjectController.ge
 /* POST /project */
 router.post('/', Auth.validate, ProjectSchema.post, ProjectController.post);
 
-/* POST /project/:projectId/donnation */
-router.post('/:projectId/donnation', Auth.validate, ProjectSchema.postDonnation, ProjectController.postDonnation);
+/* POST /project/:projectId/donation */
+router.post('/:projectId/donation', Auth.validate, ProjectSchema.postDonation, ProjectController.postDonation);
+
+/* GET /project/:projectId/donation */
+router.get('/:projectId/donation', Auth.validate, ProjectSchema.getDonation, ProjectController.getDonation);
 
 /* PUT /project/:projectId */
 // router.put('/:projectId', ProjectSchema.put, ProjectController.put);

@@ -36,11 +36,21 @@ class ProjectSchema extends RouteValidator {
     return this.validate(schema);
   }
 
-  static get postDonnation() {
+  static get postDonation() {
     const schema = {
       body: Joi.object().keys({
         valor: Joi.number().integer().required(),
         tipo: Joi.string().required(),
+      }),
+    };
+
+    return this.validate(schema);
+  }
+
+  static get getDonation() {
+    const schema = {
+      params: Joi.object().keys({
+        projectId: Joi.string().required(),
       }),
     };
 

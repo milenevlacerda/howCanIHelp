@@ -10,6 +10,13 @@ class DonationModel {
       .where('usuarioId', userId);
   }
 
+  static getFromProject(projectId) {
+    return knex
+      .select()
+      .from('Doacao')
+      .where('projetoId', projectId);
+  }
+
   static create(data) {
     return knex
       .insert(data)

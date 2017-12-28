@@ -73,7 +73,7 @@ class ProjectController {
     projectService.create(req.body, ngoId);
   }
 
-  static postDonnation(req, res) {
+  static postDonation(req, res) {
     if (res.locals.conta.isNgo) {
       res.status(400).send({
         message: 'Ong não pode fazer doações'
@@ -98,7 +98,22 @@ class ProjectController {
         Logger.throw(res, '2365958507', error);
       });
 
-    projectService.donation(donation);
+    projectService.createDonation(donation);
+  }
+
+  static getDonation(req, res) {
+    const { projectId } = req.params;
+    const projectService = new ProjectService();
+
+    projectService
+      .on('SUCCESS', (donations) => {
+        res.send(donations);
+      })
+      .on('ERROR', (error) => {
+        Logger.throw(res, '2365958507', error);
+      });
+
+    projectService.getDonations(projectId);
   }
 
   // static async put(req, res) {
