@@ -29,6 +29,15 @@ class ProjectModel {
       .into('Projeto');
   }
 
+  static getSupportedByUser(userId) {
+    return knex
+      .select('Projeto.*')
+      .from('Projeto')
+      .leftJoin('Doacao', 'Doacao.projetoId', 'Projeto.id')
+      .distinct('Projeto.id')
+      .where('Doacao.usuarioId', userId);
+  }
+
   // static edit(idProjeto, dados) {
   //   return knex
   //     .update(dados)

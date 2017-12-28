@@ -11,4 +11,7 @@ router.get('/', Auth.validate, AccountSchema.get, AccountController.get);
 /* GET /account/donations */
 router.get('/donations', Auth.validate, AccountSchema.getDonations, AccountController.getDonations);
 
+/* GET /account/projects */
+router.get('/projects', Auth.validate, AccountSchema.getProjects, AccountController.getProjects);
+
 module.exports = router;

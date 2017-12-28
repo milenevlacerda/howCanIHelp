@@ -21,9 +21,6 @@ class ProjectSchema extends RouteValidator {
 
   static get post() {
     const schema = {
-      params: Joi.object().keys({
-        projectId: Joi.string().required(),
-      }),
       body: Joi.object().keys({
         titulo: Joi.string().required(),
         categoria: Joi.string().required(),
@@ -38,6 +35,9 @@ class ProjectSchema extends RouteValidator {
 
   static get postDonation() {
     const schema = {
+      params: Joi.object().keys({
+        projectId: Joi.string().required(),
+      }),
       body: Joi.object().keys({
         valor: Joi.number().integer().required(),
         tipo: Joi.string().required(),

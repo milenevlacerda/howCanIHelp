@@ -42,6 +42,27 @@ class AccountController {
 
     accountService.getDonations(userId);
   }
+
+  static getProjects(req, res) {
+    const accountId = res.locals.conta.id;
+    const accountService = new AccountService();
+
+    accountService
+      .on('SUCCESS', (projects) => {
+        res.send(projects);
+      })
+      .on('ERROR', (error) => {
+        Logger.throw(res, '2365958507', error);
+      });
+
+    if (res.locals.conta.isNgo) {
+      accountService.getNgoProjects(accountId);
+    } else {
+      console.log(accountId);
+      
+      accountService.getUserSupportedProjects(accountId);
+    }
+  }
 }
 
 module.exports = AccountController;

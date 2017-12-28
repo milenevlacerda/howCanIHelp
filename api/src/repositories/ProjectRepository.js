@@ -14,6 +14,10 @@ class ProjectRepository {
     return ProjectModel.getFromNgo(ngoId);
   }
 
+  static getSupportedByUser(userId) {
+    return ProjectModel.getSupportedByUser(userId);
+  }
+
   static async create(data) {
     try {
       const [projectId] = await ProjectModel.create(data);

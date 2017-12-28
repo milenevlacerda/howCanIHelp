@@ -14,6 +14,13 @@ class AccountSchema extends RouteValidator {
 
     return this.validate(schema);
   }
+
+  static get getProjects() {
+    const schema = {};
+
+    return this.validate(schema);
+  }
+
 }
 
 module.exports = AccountSchema;
